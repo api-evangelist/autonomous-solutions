@@ -1,0 +1,152 @@
+openapi: 3.2.0
+info:
+  title: Vencart User Notifications API
+  version: 0.1.0
+tags:
+- name: User Notifications
+paths:
+  /user-notifications:
+    get:
+      tags:
+      - User Notifications
+      summary: List User Notifications
+      operationId: list_user_notifications_user_notifications_get
+      parameters:
+      - name: is_read
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Read
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /user-notifications/{notification_id}/read-unread:
+    patch:
+      tags:
+      - User Notifications
+      summary: Update Notification Read Status
+      operationId: update_notification_read_status_user_notifications__notification_id__read_unread_patch
+      parameters:
+      - name: notification_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Notification Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationReadStatusSchema'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /user-notifications/read-all:
+    post:
+      tags:
+      - User Notifications
+      summary: Mark All As Read
+      operationId: mark_all_as_read_user_notifications_read_all_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /user-notifications/unread-count:
+    get:
+      tags:
+      - User Notifications
+      summary: Get Unread Count
+      operationId: get_unread_count_user_notifications_unread_count_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    UpdateNotificationReadStatusSchema:
+      properties:
+        is_read:
+          type: boolean
+          title: Is Read
+      type: object
+      required:
+      - is_read
+      title: UpdateNotificationReadStatusSchema
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

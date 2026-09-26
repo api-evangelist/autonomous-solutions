@@ -1,0 +1,20 @@
+generated: '2026-09-26'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://developer.venhub.com/docs/index.html
+sources:
+- https://developer.venhub.com/docs/index.html
+- https://developer.venhub.com/docs/authentication.html
+idempotency:
+  coverage: none
+  evidence: The documentation does not describe any idempotency key or mechanism for write operations.
+pagination:
+  style: cursor
+  params:
+  - cursor
+  response_fields:
+  - next_cursor
+  evidence: Uses cursor‑based pagination. Pass the next_cursor value as the `cursor` query parameter in subsequent requests.
+versioning: Versioned via the URL prefix `/api/v1`.
+authentication: 'All endpoints require either an API key (`X-API-Key: vh_...`) or a Firebase Bearer token (`Authorization: Bearer <token>`).'
+docs: https://developer.venhub.com/docs/index.html

@@ -1,0 +1,327 @@
+openapi: 3.2.0
+info:
+  title: Vencart User Payment API
+  version: 0.1.0
+tags:
+- name: user-payment
+paths:
+  /users/payments/setup-intent:
+    post:
+      tags:
+      - user-payment
+      summary: Get Setup Intent
+      operationId: get_setup_intent_users_payments_setup_intent_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSecretSchema'
+  /users/payments/save-payment-method:
+    post:
+      tags:
+      - user-payment
+      summary: Attach Payment Method
+      operationId: attach_payment_method_users_payments_save_payment_method_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodAttachRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/payments/methods:
+    get:
+      tags:
+      - user-payment
+      summary: Get User Payment Methods
+      operationId: get_user_payment_methods_users_payments_methods_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /users/payments/pay:
+    post:
+      tags:
+      - user-payment
+      summary: Pay With Card
+      operationId: pay_with_card_users_payments_pay_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardPaymentRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/payments/apple-pay:
+    post:
+      tags:
+      - user-payment
+      summary: Pay With Apple Pay
+      operationId: pay_with_apple_pay_users_payments_apple_pay_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplePayRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/payments/google-pay:
+    post:
+      tags:
+      - user-payment
+      summary: Pay With Google Pay
+      operationId: pay_with_google_pay_users_payments_google_pay_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePayRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/payments/confirm-payment:
+    post:
+      tags:
+      - user-payment
+      summary: Confirm Payment
+      operationId: confirm_payment_users_payments_confirm_payment_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmPaymentSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/payments/methods/{payment_method_id}:
+    delete:
+      tags:
+      - user-payment
+      summary: Remove User Payment Method
+      operationId: remove_user_payment_method_users_payments_methods__payment_method_id__delete
+      parameters:
+      - name: payment_method_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Payment Method Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    CardPaymentRequestSchema:
+      properties:
+        payment_method_id:
+          type: string
+          title: Payment Method Id
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        deal_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Deal Ids
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - payment_method_id
+      - order_id
+      title: CardPaymentRequestSchema
+    PaymentMethodAttachRequestSchema:
+      properties:
+        payment_method_id:
+          type: string
+          title: Payment Method Id
+      type: object
+      required:
+      - payment_method_id
+      title: PaymentMethodAttachRequestSchema
+    GooglePayRequestSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      title: GooglePayRequestSchema
+    ConfirmPaymentSchema:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        payment_intent_id:
+          type: string
+          title: Payment Intent Id
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - success
+      - payment_intent_id
+      - order_id
+      title: ConfirmPaymentSchema
+    ApplePayRequestSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      title: ApplePayRequestSchema
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ClientSecretSchema:
+      properties:
+        client_secret:
+          type: string
+          title: Client Secret
+      type: object
+      required:
+      - client_secret
+      title: ClientSecretSchema
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

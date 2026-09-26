@@ -1,0 +1,14 @@
+generated: '2026-09-26'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://developer.venhub.com/docs/index.html
+sources:
+- https://developer.venhub.com/docs/index.html
+versioning:
+  scheme: URL path prefix
+  current: v1
+  how_selected: Explicitly via the /api/v1 URL prefix
+  docs: https://developer.venhub.com/docs/index.html
+deprecation: {}
+status_page: null
+docs: https://developer.venhub.com/docs/index.html

@@ -1,0 +1,152 @@
+openapi: 3.2.0
+info:
+  title: Vencart Bg Tasks API
+  version: 0.1.0
+tags:
+- name: bg_tasks
+paths:
+  /diag/bg_tasks/bestsellers:
+    get:
+      tags:
+      - bg_tasks
+      summary: Recalculate Bestsellers
+      operationId: recalculate_bestsellers_diag_bg_tasks_bestsellers_get
+      parameters:
+      - name: sync_mode
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Sync Mode
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+          description: Accepted
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /diag/bg_tasks/update-timed-out-orders:
+    get:
+      tags:
+      - bg_tasks
+      summary: Update Timed Out Orders
+      operationId: update_timed_out_orders_diag_bg_tasks_update_timed_out_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/delete_expired_orders:
+    get:
+      tags:
+      - bg_tasks
+      summary: Delete Expired Orders
+      operationId: delete_expired_orders_diag_bg_tasks_delete_expired_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/notify-about-expiring-orders:
+    get:
+      tags:
+      - bg_tasks
+      summary: Notify About Expiring Order
+      operationId: notify_about_expiring_order_diag_bg_tasks_notify_about_expiring_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/update-unclaimed-orders-to-failed:
+    get:
+      tags:
+      - bg_tasks
+      summary: Update Unclaimed Orders To Failed
+      operationId: update_unclaimed_orders_to_failed_diag_bg_tasks_update_unclaimed_orders_to_failed_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/notify-about-unclaimed-orders:
+    get:
+      tags:
+      - bg_tasks
+      summary: Notify About Unclaimed Orders
+      operationId: notify_about_unclaimed_orders_diag_bg_tasks_notify_about_unclaimed_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BgTaskResponse:
+      properties:
+        job_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Job Id
+      type: object
+      title: BgTaskResponse

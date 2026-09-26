@@ -1,0 +1,38 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/autonomous-solutions-openapi.json
+format: custom
+envelope:
+  media_type: application/json
+  schema: HTTPValidationError
+coverage:
+  operations: 111
+  statuses_declared: 4
+problems:
+- status: 401
+  title: Unauthorized
+  description: Invalid or expired token
+  operations: 1
+  media_types: []
+  schema: null
+- status: 403
+  title: Forbidden
+  description: Not authorized to update this user's Firebase ID
+  operations: 1
+  media_types: []
+  schema: null
+- status: 404
+  title: Not Found
+  description: Hub not found
+  operations: 5
+  media_types: []
+  schema: null
+- status: 422
+  title: Unprocessable Content
+  description: Validation Error
+  operations: 93
+  media_types:
+  - application/json
+  schema: HTTPValidationError

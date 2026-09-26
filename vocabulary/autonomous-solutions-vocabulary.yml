@@ -1,0 +1,428 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/autonomous-solutions-openapi.json
+vocabulary:
+  name: VenHub Domain Vocabulary
+  description: 'Terms declared by VenHub''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-09-26'
+  terms:
+  - term: ActiveDealDisplaySchema
+    definition: Schema for displaying active deals in the banner
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ActiveDealDisplaySchema
+  - term: ApplePayRequestSchema
+    definition: 'Object declared by the contract with fields: order_id, deal_id, venbucks_to_redeem.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ApplePayRequestSchema
+  - term: ApplyRewardRequestSchema
+    definition: Schema for applying a reward to the cart
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ApplyRewardRequestSchema
+  - term: ApplyRewardResponseSchema
+    definition: Response schema for applying rewards
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ApplyRewardResponseSchema
+  - term: BgTaskResponse
+    definition: 'Object declared by the contract with fields: job_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/BgTaskResponse
+  - term: BinStatus
+    definition: 'Status information for an individual bin. Attributes: bin_num: The bin number occurrence: The occurrence count for this bin (for
+      handling multiple bins with the same number) status_code: VensmartStatusCode indicating the bin''s current state is_ready: Whether the bin
+      is ready to be opened is_dropped: Whether all items in this bin were dropped'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/BinStatus
+  - term: Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post
+    definition: 'Object declared by the contract with fields: order_total_cents.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post
+  - term: Body_create_deal_from_owner_deals_create_from_owner_post
+    definition: 'Object declared by the contract with fields: dealData, file.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/Body_create_deal_from_owner_deals_create_from_owner_post
+  - term: Body_create_hub_banner_hubs_owner_banners_post
+    definition: 'Object declared by the contract with fields: name, order_by, file.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/Body_create_hub_banner_hubs_owner_banners_post
+  - term: Body_update_user_profile_image_users_user_profile_image_patch
+    definition: 'Object declared by the contract with fields: files.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/Body_update_user_profile_image_users_user_profile_image_patch
+  - term: CardPaymentRequestSchema
+    definition: 'Object declared by the contract with fields: payment_method_id, order_id, deal_id, deal_ids, venbucks_to_redeem.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/CardPaymentRequestSchema
+  - term: CartItemSchema
+    definition: Schema for cart items when checking eligibility
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/CartItemSchema
+  - term: CeleryWorkerResponse
+    definition: 'Object declared by the contract with fields: environment, statistics, tasks, metrics.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/CeleryWorkerResponse
+  - term: CheckEligibilityRequestSchema
+    definition: Schema for checking if cart meets deal trigger conditions
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/CheckEligibilityRequestSchema
+  - term: CheckEligibilityResponseSchema
+    definition: Response schema for eligibility check
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/CheckEligibilityResponseSchema
+  - term: ClientSecretSchema
+    definition: 'Object declared by the contract with fields: client_secret.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ClientSecretSchema
+  - term: ConfirmPaymentSchema
+    definition: 'Object declared by the contract with fields: success, payment_intent_id, order_id, deal_id, venbucks_to_redeem.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ConfirmPaymentSchema
+  - term: ConstraintType
+    definition: Enumeration for deal constraint types
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ConstraintType
+  - term: ContactChannel
+    definition: 'Enumeration declared by the contract with values: email, phone.'
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ContactChannel
+  - term: DealConstraintBaseSchema
+    definition: 'Object declared by the contract with fields: name, constraint_type, redemption_limit, period, product_id, category_id, subcategory_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealConstraintBaseSchema
+  - term: DealConstraintRetrieveSchema
+    definition: 'Object declared by the contract with fields: name, constraint_type, redemption_limit, period, product_id, category_id, subcategory_id,
+      id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealConstraintRetrieveSchema
+  - term: DealCreateSchema
+    definition: 'Object declared by the contract with fields: name, description, display_text, display_image, start, end, hub_id, is_deal_active,
+      stackable, priority, rewards, triggers. (1 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealCreateSchema
+  - term: DealRedemptionStatusSchema
+    definition: Schema for deal redemption status (owners app)
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealRedemptionStatusSchema
+  - term: DealRetrieveSchema
+    definition: 'Object declared by the contract with fields: name, description, display_text, display_image, start, end, hub_id, is_deal_active,
+      stackable, priority, id, created_at. (4 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealRetrieveSchema
+  - term: DealRewardBaseSchema
+    definition: 'Object declared by the contract with fields: name, reward_type, product_id, category_id, subcategory_id, discount_pct_or_price.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealRewardBaseSchema
+  - term: DealRewardRetrieveSchema
+    definition: 'Object declared by the contract with fields: name, reward_type, product_id, category_id, subcategory_id, discount_pct_or_price,
+      id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealRewardRetrieveSchema
+  - term: DealTriggerBaseSchema
+    definition: 'Object declared by the contract with fields: name, trigger_type, product_id, category_id, subcategory_id, nth_order, min_val_trigger,
+      time_window_start, time_window_end, days_of_the_week.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealTriggerBaseSchema
+  - term: DealTriggerRetrieveSchema
+    definition: 'Object declared by the contract with fields: name, trigger_type, product_id, category_id, subcategory_id, nth_order, min_val_trigger,
+      time_window_start, time_window_end, days_of_the_week, id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealTriggerRetrieveSchema
+  - term: DealUpdateSchema
+    definition: 'Object declared by the contract with fields: name, description, display_text, display_image, start, end, hub_id, is_deal_active,
+      stackable, priority.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DealUpdateSchema
+  - term: DeviceTypeEnum
+    definition: 'Enumeration declared by the contract with values: ios, android.'
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DeviceTypeEnum
+  - term: DroppedItem
+    definition: 'Object declared by the contract with fields: quantity, product_detail_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/DroppedItem
+  - term: EligibleDealSchema
+    definition: Schema for deals that the cart is eligible for
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/EligibleDealSchema
+  - term: GeoJsonLocation
+    definition: 'Object declared by the contract with fields: type, coordinates.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GeoJsonLocation
+  - term: GooglePayRequestSchema
+    definition: 'Object declared by the contract with fields: order_id, deal_id, venbucks_to_redeem.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GooglePayRequestSchema
+  - term: GuestCardPaymentSchema
+    definition: 'Object declared by the contract with fields: order_id, stripe_payment_method_id, deal_id, venbucks_to_redeem.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GuestCardPaymentSchema
+  - term: GuestClaimOrderResponseSchema
+    definition: 'Object declared by the contract with fields: order_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GuestClaimOrderResponseSchema
+  - term: GuestClaimOrderSchema
+    definition: 'Object declared by the contract with fields: guest_token, order_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GuestClaimOrderSchema
+  - term: GuestContactSchema
+    definition: 'Object declared by the contract with fields: email, phone, accepts_promotional_emails.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GuestContactSchema
+  - term: GuestSessionCreateSchema
+    definition: 'Object declared by the contract with fields: hub_id, fcm_token, device_id, device_type.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GuestSessionCreateSchema
+  - term: GuestSessionResponseSchema
+    definition: 'Object declared by the contract with fields: guest_token, guest_user_id, order_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/GuestSessionResponseSchema
+  - term: HTTPValidationError
+    definition: 'Object declared by the contract with fields: detail.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HTTPValidationError
+  - term: HubDefaultRequest
+    definition: 'Object declared by the contract with fields: geojson_location.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HubDefaultRequest
+  - term: HubEvent
+    definition: 'Object declared by the contract with fields: message_type, message_content.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HubEvent
+  - term: HubMessageType
+    definition: 'Enumeration declared by the contract with values: info, warning, error, update, heartbeat, notification, order_completed, order_update,
+      order_started, door_opened.'
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HubMessageType
+  - term: HubNameLookupRequest
+    definition: 'Object declared by the contract with fields: name, geojson_location, multi_search.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HubNameLookupRequest
+  - term: HubStatus
+    definition: 'Enumeration declared by the contract with values: active, maintenance, restocking, hidden.'
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HubStatus
+  - term: HubStatusUpdateRequest
+    definition: 'Object declared by the contract with fields: hub_status.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HubStatusUpdateRequest
+  - term: HubUserCurrentResponse
+    definition: 'Object declared by the contract with fields: id, name, geojson_location, country, state, city, postal_code, street_address_1,
+      street_address_2, tax_rates, timezone, approximate_order_limit. (3 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/HubUserCurrentResponse
+  - term: JobStatusFindRequest
+    definition: 'Object declared by the contract with fields: id, job_id, name, args, status, message.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/JobStatusFindRequest
+  - term: JobStatusResponse
+    definition: 'Object declared by the contract with fields: id, job_id, name, args, created_at, updated_at, status, message.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/JobStatusResponse
+  - term: LoyaltyPointsBalanceSchema
+    definition: Schema for user's loyalty points balance
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/LoyaltyPointsBalanceSchema
+  - term: LoyaltyPointsCalculationSchema
+    definition: Schema for calculating potential points for an order
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/LoyaltyPointsCalculationSchema
+  - term: MessageContent
+    definition: 'Object declared by the contract with fields: user_id, order_id, status_code, current_bin, bin_num, bins_status, dropped_items,
+      bin_nums, message, hub_response_status_code.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/MessageContent
+  - term: ModifiedCartItemSchema
+    definition: Schema for cart items with applied discounts
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ModifiedCartItemSchema
+  - term: OrderOrderingField
+    definition: 'Enumeration declared by the contract with values: created_at, price, status.'
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/OrderOrderingField
+  - term: OrderProcessingStatus
+    definition: Enumeration of the various stages an Order can be in, from creation through payment and fulfillment.
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/OrderProcessingStatus
+  - term: PaymentMethodAttachRequestSchema
+    definition: 'Object declared by the contract with fields: payment_method_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/PaymentMethodAttachRequestSchema
+  - term: ProductRetrieveSchema
+    definition: 'Object declared by the contract with fields: name, image_url, upc, original_price, discounted_price, quantity_in_stock, max_per_order,
+      subcategory_id, category_id, hub_id, is_favorite, id. (10 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ProductRetrieveSchema
+  - term: ProductTaxType
+    definition: 'Enumeration declared by the contract with values: sales_tax, bottle_tax, no_tax, unknown_tax.'
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/ProductTaxType
+  - term: RewardType
+    definition: Enumeration for deal reward types
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/RewardType
+  - term: SimilarProductSchema
+    definition: 'Object declared by the contract with fields: name, image_url, upc, original_price, discounted_price, quantity_in_stock, max_per_order,
+      subcategory_id, category_id, hub_id, is_favorite, id. (2 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/SimilarProductSchema
+  - term: SysInfoResponse
+    definition: 'Object declared by the contract with fields: environment, platform, usage, app_settings.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/SysInfoResponse
+  - term: TransferAnonOrderRequest
+    definition: 'Object declared by the contract with fields: anon_user_id, order_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/TransferAnonOrderRequest
+  - term: TransferAnonOrderResponse
+    definition: 'Object declared by the contract with fields: order_id, hub_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/TransferAnonOrderResponse
+  - term: TriggerType
+    definition: Enumeration for deal trigger types
+    tags:
+    - Enumeration
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/TriggerType
+  - term: UpdateNotificationReadStatusSchema
+    definition: 'Object declared by the contract with fields: is_read.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UpdateNotificationReadStatusSchema
+  - term: UpdateOrderItemSchema
+    definition: 'Object declared by the contract with fields: product_id, quantity.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UpdateOrderItemSchema
+  - term: UserBootstrap
+    definition: Body for POST /users/bootstrap — Firebase verified the contact channel already.
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserBootstrap
+  - term: UserBootstrapResponse
+    definition: 'Object declared by the contract with fields: user_id, profile_complete.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserBootstrapResponse
+  - term: UserCreate
+    definition: 'Object declared by the contract with fields: firebase_user_id, first_name, last_name, birthday, country, state, city, postal_code,
+      street_address_1, street_address_2, email, phone_num. (5 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserCreate
+  - term: UserCreateRetrieve
+    definition: 'Object declared by the contract with fields: id, firebase_user_id, selected_hub_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserCreateRetrieve
+  - term: UserDataRetrieve
+    definition: 'Object declared by the contract with fields: firebase_user_id, first_name, last_name, birthday, country, state, city, postal_code,
+      street_address_1, street_address_2, email, phone_num. (11 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserDataRetrieve
+  - term: UserExists
+    definition: 'Object declared by the contract with fields: exists, firebase_user_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserExists
+  - term: UserFCMConfigCreateSchema
+    definition: 'Object declared by the contract with fields: fcm_token, device_id, device_type.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserFCMConfigCreateSchema
+  - term: UserFirebaseIdUpdate
+    definition: 'Object declared by the contract with fields: phone_number, email, firebase_user_id.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserFirebaseIdUpdate
+  - term: UserProfileImage
+    definition: 'Object declared by the contract with fields: url.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserProfileImage
+  - term: UserProfileMeResponse
+    definition: Response for PATCH /user/me/profile — null-safe during progressive signup.
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserProfileMeResponse
+  - term: UserProfilePatch
+    definition: Body for PATCH /users/me/profile — supplies fields currently null on the user row.
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserProfilePatch
+  - term: UserProfileRetrieve
+    definition: 'Object declared by the contract with fields: firebase_user_id, first_name, last_name, birthday, country, state, city, postal_code,
+      street_address_1, street_address_2, email, phone_num. (9 more)'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserProfileRetrieve
+  - term: UserProfileUpdate
+    definition: 'Object declared by the contract with fields: first_name, last_name, birthday, country, state, city, postal_code, street_address_1,
+      street_address_2, email, phone_num, is_migrated.'
+    tags:
+    - Object
+    source: openapi/autonomous-solutions-openapi.json#/components/schemas/UserProfileUpdate

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/autonomous-solutions/main/json-schema/autonomous-solutions-user-create-schema.json",
+  "title": "UserCreate",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/autonomous-solutions-openapi.json#/components/schemas/UserCreate",
+  "properties": {
+    "firebase_user_id": {
+      "type": "string",
+      "title": "Firebase User Id"
+    },
+    "first_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "First Name"
+    },
+    "last_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Name"
+    },
+    "birthday": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Birthday"
+    },
+    "country": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Country"
+    },
+    "state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "State"
+    },
+    "city": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "City"
+    },
+    "postal_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Postal Code"
+    },
+    "street_address_1": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Street Address 1"
+    },
+    "street_address_2": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Street Address 2"
+    },
+    "email": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "email"
+        },
+        {
+          "type": "string",
+          "const": ""
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Email"
+    },
+    "phone_num": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Phone Num"
+    },
+    "image_url": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "format": "uri"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Image Url"
+    },
+    "selected_hub_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Selected Hub Id"
+    },
+    "is_migrated": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Is Migrated",
+      "default": false
+    },
+    "profile_complete": {
+      "type": "boolean",
+      "title": "Profile Complete",
+      "default": false
+    },
+    "geojson_location": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GeoJsonLocation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "required": [
+    "firebase_user_id"
+  ],
+  "$defs": {
+    "GeoJsonLocation": {
+      "properties": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Type",
+          "default": "Point"
+        },
+        "coordinates": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array",
+          "title": "Coordinates"
+        }
+      },
+      "type": "object",
+      "required": [
+        "coordinates"
+      ],
+      "title": "GeoJsonLocation"
+    }
+  }
+}

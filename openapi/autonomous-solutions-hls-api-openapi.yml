@@ -1,0 +1,193 @@
+openapi: 3.2.0
+info:
+  title: Vencart HLS API
+  version: 0.1.0
+tags:
+- name: HLS
+paths:
+  /cameras/stream/{hub_id}/{camera}/index.m3u8:
+    get:
+      tags:
+      - HLS
+      summary: Get Playlist
+      operationId: get_playlist_cameras_stream__hub_id___camera__index_m3u8_get
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Hub Id
+      - name: camera
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Camera
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /cameras/stream/{hub_id}/{camera}/{tail_path}:
+    get:
+      tags:
+      - HLS
+      summary: Get Segment
+      operationId: get_segment_cameras_stream__hub_id___camera___tail_path__get
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Hub Id
+      - name: camera
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Camera
+      - name: tail_path
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Tail Path
+      - name: Range
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Range
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    head:
+      tags:
+      - HLS
+      summary: Head Segment
+      operationId: head_segment_cameras_stream__hub_id___camera___tail_path__head
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Hub Id
+      - name: camera
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Camera
+      - name: tail_path
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Tail Path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /cameras/stream/streams:
+    get:
+      tags:
+      - HLS
+      summary: List Streams
+      description: Return the camera inventory for the given hub_id (from HUB_TO_ENDPOINTS_MAP).
+      operationId: list_streams_cameras_stream_streams_get
+      parameters:
+      - name: hub_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Hub id key from HUB_TO_ENDPOINTS_MAP
+          title: Hub Id
+        description: Hub id key from HUB_TO_ENDPOINTS_MAP
+      - name: include_offline
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Include offline streams
+          default: true
+          title: Include Offline
+        description: Include offline streams
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

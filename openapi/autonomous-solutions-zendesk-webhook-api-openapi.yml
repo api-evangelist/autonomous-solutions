@@ -1,0 +1,111 @@
+openapi: 3.2.0
+info:
+  title: Vencart Zendesk Webhook API
+  version: 0.1.0
+tags:
+- name: zendesk-webhook
+paths:
+  /webhooks/zendesk:
+    post:
+      tags:
+      - zendesk-webhook
+      summary: Zendesk Webhook
+      operationId: zendesk_webhook_webhooks_zendesk_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZendeskWebhookRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ZendeskWebhookRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        account_id:
+          type: integer
+          title: Account Id
+        type:
+          type: string
+          title: Type
+        time:
+          type: string
+          title: Time
+        zendesk_event_version:
+          type: string
+          title: Zendesk Event Version
+        subject:
+          type: string
+          title: Subject
+        detail:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Detail
+          default: {}
+        event:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Event
+          default: {}
+      type: object
+      required:
+      - id
+      - account_id
+      - type
+      - time
+      - zendesk_event_version
+      - subject
+      title: ZendeskWebhookRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

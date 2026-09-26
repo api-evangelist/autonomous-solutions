@@ -1,0 +1,364 @@
+openapi: 3.2.0
+info:
+  title: Vencart Diagnostics API
+  version: 0.1.0
+tags:
+- name: Diagnostics
+paths:
+  /diag/sysinfo:
+    get:
+      tags:
+      - Diagnostics
+      summary: Get Sysinfo
+      operationId: get_sysinfo_diag_sysinfo_get
+      parameters:
+      - name: with_settings
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: With Settings
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SysInfoResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /diag/celery:
+    get:
+      tags:
+      - Diagnostics
+      summary: Get Celery Data
+      operationId: get_celery_data_diag_celery_get
+      parameters:
+      - name: with_tasks
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: With Tasks
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CeleryWorkerResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /diag/logs/list:
+    get:
+      tags:
+      - Diagnostics
+      summary: List Dir
+      operationId: list_dir_diag_logs_list_get
+      parameters:
+      - name: path
+        in: query
+        required: false
+        schema:
+          type: string
+          default: .
+          title: Path
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          default: date
+          title: Order
+      - name: reverse
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Reverse
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /diag/logs/view:
+    get:
+      tags:
+      - Diagnostics
+      summary: View Logs
+      operationId: view_logs_diag_logs_view_get
+      parameters:
+      - name: lines
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Lines
+      - name: file
+        in: query
+        required: false
+        schema:
+          type: string
+          title: File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /diag/logs/stream:
+    get:
+      tags:
+      - Diagnostics
+      summary: View Logs Stream
+      operationId: view_logs_stream_diag_logs_stream_get
+      parameters:
+      - name: file
+        in: query
+        required: false
+        schema:
+          type: string
+          title: File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /diag/logs/monitor:
+    get:
+      tags:
+      - Diagnostics
+      summary: Monitor Logs
+      operationId: monitor_logs_diag_logs_monitor_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /diag/bg_tasks/bestsellers:
+    get:
+      tags:
+      - Diagnostics
+      summary: Recalculate Bestsellers
+      operationId: recalculate_bestsellers_diag_bg_tasks_bestsellers_get
+      parameters:
+      - name: sync_mode
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Sync Mode
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+          description: Accepted
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /diag/bg_tasks/update-timed-out-orders:
+    get:
+      tags:
+      - Diagnostics
+      summary: Update Timed Out Orders
+      operationId: update_timed_out_orders_diag_bg_tasks_update_timed_out_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/delete_expired_orders:
+    get:
+      tags:
+      - Diagnostics
+      summary: Delete Expired Orders
+      operationId: delete_expired_orders_diag_bg_tasks_delete_expired_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/notify-about-expiring-orders:
+    get:
+      tags:
+      - Diagnostics
+      summary: Notify About Expiring Order
+      operationId: notify_about_expiring_order_diag_bg_tasks_notify_about_expiring_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/update-unclaimed-orders-to-failed:
+    get:
+      tags:
+      - Diagnostics
+      summary: Update Unclaimed Orders To Failed
+      operationId: update_unclaimed_orders_to_failed_diag_bg_tasks_update_unclaimed_orders_to_failed_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+  /diag/bg_tasks/notify-about-unclaimed-orders:
+    get:
+      tags:
+      - Diagnostics
+      summary: Notify About Unclaimed Orders
+      operationId: notify_about_unclaimed_orders_diag_bg_tasks_notify_about_unclaimed_orders_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgTaskResponse'
+components:
+  schemas:
+    CeleryWorkerResponse:
+      properties:
+        environment:
+          type: string
+          title: Environment
+        statistics:
+          additionalProperties: true
+          type: object
+          title: Statistics
+        tasks:
+          additionalProperties: true
+          type: object
+          title: Tasks
+        metrics:
+          items:
+            $ref: '#/components/schemas/SysInfoResponse'
+          type: array
+          title: Metrics
+      type: object
+      required:
+      - environment
+      - statistics
+      - tasks
+      - metrics
+      title: CeleryWorkerResponse
+    BgTaskResponse:
+      properties:
+        job_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Job Id
+      type: object
+      title: BgTaskResponse
+    SysInfoResponse:
+      properties:
+        environment:
+          type: string
+          title: Environment
+        platform:
+          additionalProperties: true
+          type: object
+          title: Platform
+        usage:
+          additionalProperties: true
+          type: object
+          title: Usage
+        app_settings:
+          additionalProperties: true
+          type: object
+          title: App Settings
+      type: object
+      required:
+      - environment
+      - platform
+      - usage
+      - app_settings
+      title: SysInfoResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

@@ -1,23 +1,632 @@
 aid: autonomous-solutions
 name: VenHub
-description: 'VenHub is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+image: https://cdn.prod.website-files.com/677e907895fc1e8027870502/67d2abf76336b985bc173248_image%20(35)-min.png
+description: VenHub is the industry leader in robotic retail, providing fully autonomous, AI‑powered smart stores that operate 24/7 without staff.
+  Their solutions enable rapid deployment, seamless checkout‑free experiences, and scalable retail automation across venues such as hospitals,
+  hotels, schools, and transportation hubs.
 url: https://raw.githubusercontent.com/api-evangelist/autonomous-solutions/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-09-26 (modular-v1; was harvest)
 specificationVersion: '0.20'
 created: '2026-09-26'
 modified: '2026-09-26'
 tags:
-- Company
-apis: []
+- Retail
+- Robotics
+- Automated Stores
+- Smart Lockers
+- 24/7 Retail
+- Hospitality
+- Education
+- Healthcare
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/autonomous-solutions-agentic-access.yml
+- type: RateLimits
+  url: rate-limits/autonomous-solutions-rate-limits.yml
+- type: Spectral
+  url: rules/autonomous-solutions-rules.yml
+- type: JSONLD
+  url: json-ld/autonomous-solutions-context.jsonld
+- type: Vocabulary
+  url: vocabulary/autonomous-solutions-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/autonomous-solutions-data-model.yml
+- type: Conventions
+  url: conventions/autonomous-solutions-conventions.yml
+- type: Authentication
+  url: authentication/autonomous-solutions-authentication.yml
+- type: Lifecycle
+  url: lifecycle/autonomous-solutions-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/autonomous-solutions-problem-types.yml
+- type: Conformance
+  url: conformance/autonomous-solutions-conformance.yml
+- type: Overlay
+  url: overlays/autonomous-solutions-openapi-overlay.yaml
+- type: Hosts
+  url: hosts/autonomous-solutions-hosts.yml
+- type: Vendors
+  url: vendors/autonomous-solutions-vendors.yml
+- type: TrustCenter
+  url: https://trust.venhub.com/
+- type: TermsOfService
+  url: https://www.venhub.com/legal/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://www.venhub.com/legal/privacy-policy
+- type: Newsroom
+  url: https://www.venhub.com/news/lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed
+- type: GettingStarted
+  url: https://developer.venhub.com/docs/index.html
+- type: Documentation
+  url: https://developer.venhub.com/
+- type: DomainSecurity
+  url: security/autonomous-solutions-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/autonomous-solutions_stock/
+  url: https://www.venhub.com/
+apis:
+- aid: autonomous-solutions:autonomous-solutions-banners-api
+  name: VenHub Banners API
+  description: The banners API from VenHub — 2 operation(s) for banners.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - banners
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-banners-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-bg-tasks-api
+  name: VenHub Bg Tasks API
+  description: The bg_tasks API from VenHub — 6 operation(s) for bg_tasks.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - bg_tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-bg-tasks-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-categories-api
+  name: VenHub Categories API
+  description: The categories API from VenHub — 2 operation(s) for categories.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - categories
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-categories-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-deals-api
+  name: VenHub Deals API
+  description: The deals API from VenHub — 9 operation(s) for deals.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - deals
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-deals-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-diagnostics-api
+  name: VenHub Diagnostics API
+  description: The diagnostics API from VenHub — 12 operation(s) for diagnostics.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - diagnostics
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-diagnostics-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-guest-checkout-api
+  name: VenHub Guest Checkout API
+  description: The guest-checkout API from VenHub — 10 operation(s) for guest-checkout.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - guest-checkout
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-guest-checkout-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-hls-api
+  name: VenHub HLS API
+  description: The HLS API from VenHub — 3 operation(s) for hls.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - HLS
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-hls-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-hubs-api
+  name: VenHub Hubs API
+  description: The hubs API from VenHub — 6 operation(s) for hubs.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - hubs
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-hubs-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-jobs-api
+  name: VenHub Jobs API
+  description: The jobs API from VenHub — 2 operation(s) for jobs.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-jobs-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-logs-api
+  name: VenHub Logs API
+  description: The logs API from VenHub — 4 operation(s) for logs.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - logs
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-logs-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-loyalty-points-api
+  name: VenHub Loyalty Points API
+  description: The loyalty-points API from VenHub — 2 operation(s) for loyalty-points.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - loyalty-points
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-loyalty-points-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-orders-api
+  name: VenHub Orders API
+  description: The orders API from VenHub — 8 operation(s) for orders.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - orders
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-orders-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-products-api
+  name: VenHub Products API
+  description: The products API from VenHub — 6 operation(s) for products.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - products
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-products-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-root-api
+  name: VenHub Root API
+  description: The root API from VenHub — 1 operation(s) for root.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - root
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-root-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-selected-hub-api
+  name: VenHub selected hub API
+  description: The selected hub API from VenHub — 2 operation(s) for selected hub.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - selected hub
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-selected-hub-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-user-api
+  name: VenHub User API
+  description: The user API from VenHub — 14 operation(s) for user.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-user-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-user-favorites-api
+  name: VenHub User Favorites API
+  description: The user-favorites API from VenHub — 2 operation(s) for user-favorites.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - user-favorites
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-user-favorites-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-user-notifications-api
+  name: VenHub User Notifications API
+  description: The user-notifications API from VenHub — 4 operation(s) for user-notifications.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - user-notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-user-notifications-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-user-payment-api
+  name: VenHub User Payment API
+  description: The user-payment API from VenHub — 8 operation(s) for user-payment.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - user-payment
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-user-payment-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-user-profile-api
+  name: VenHub user profile API
+  description: The user profile API from VenHub — 3 operation(s) for user profile.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - user profile
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-user-profile-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-user-wallet-api
+  name: VenHub User Wallet API
+  description: The user-wallet API from VenHub — 4 operation(s) for user-wallet.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - user-wallet
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-user-wallet-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-vensmart-api
+  name: VenHub Vensmart API
+  description: The vensmart API from VenHub — 1 operation(s) for vensmart.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - vensmart
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-vensmart-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-zendesk-api
+  name: VenHub Zendesk API
+  description: The zendesk API from VenHub — 1 operation(s) for zendesk.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - zendesk
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-zendesk-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-zendesk-webhook-api
+  name: VenHub Zendesk Webhook API
+  description: The zendesk-webhook API from VenHub — 1 operation(s) for zendesk-webhook.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - zendesk-webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-zendesk-webhook-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+- aid: autonomous-solutions:autonomous-solutions-health-check-api
+  name: VenHub Health Check API
+  description: The Health Check API from VenHub — 1 operation(s) for health check.
+  humanURL: https://developer.venhub.com/docs/index.html
+  baseURL: https://api.venhub.com
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/autonomous-solutions-health-check-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-data-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-profile-retrieve-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-product-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-user-create-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-deal-retrieve-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/autonomous-solutions-wallet-transaction-response-schema.json
+x-enrichment:
+  date: '2026-09-26'
+  status: enriched
+  artifacts_added: 24
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

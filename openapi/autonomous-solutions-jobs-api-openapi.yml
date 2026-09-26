@@ -1,0 +1,201 @@
+openapi: 3.2.0
+info:
+  title: Vencart Jobs API
+  version: 0.1.0
+tags:
+- name: Jobs
+paths:
+  /jobs/{job_id}:
+    get:
+      tags:
+      - Jobs
+      summary: Get Job Status
+      operationId: get_job_status_jobs__job_id__get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatusResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /jobs/find:
+    post:
+      tags:
+      - Jobs
+      summary: Find Jobs
+      operationId: find_jobs_jobs_find_post
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Limit
+      - name: reverse
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Reverse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobStatusFindRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobStatusResponse'
+                title: Response 200 Find Jobs Jobs Find Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    JobStatusResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        job_id:
+          type: string
+          format: uuid
+          title: Job Id
+        name:
+          type: string
+          title: Name
+        args:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Args
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        status:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - id
+      - job_id
+      - name
+      - created_at
+      title: JobStatusResponse
+    JobStatusFindRequest:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        job_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Job Id
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        args:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Args
+        status:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      title: JobStatusFindRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

@@ -1,0 +1,222 @@
+openapi: 3.2.0
+info:
+  title: Vencart selected hub API
+  version: 0.1.0
+tags:
+- name: selected hub
+paths:
+  /users/user/hub/{hub_id}:
+    post:
+      tags:
+      - selected hub
+      summary: Select User Hub
+      operationId: select_user_hub_users_user_hub__hub_id__post
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: User selected hub
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HubUserCurrentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - selected hub
+      summary: Unselect User Hub
+      operationId: unselect_user_hub_users_user_hub__hub_id__delete
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '204':
+          description: User deleted selected hub
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/default-hub:
+    post:
+      tags:
+      - selected hub
+      summary: Select User Default Hub
+      operationId: select_user_default_hub_users_user_default_hub_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HubDefaultRequest'
+        required: true
+      responses:
+        '200':
+          description: Set default hub for user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HubUserCurrentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HubUserCurrentResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        country:
+          type: string
+          title: Country
+        state:
+          type: string
+          title: State
+        city:
+          type: string
+          title: City
+        postal_code:
+          type: string
+          title: Postal Code
+        street_address_1:
+          type: string
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        tax_rates:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Tax Rates
+        timezone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Timezone
+        approximate_order_limit:
+          type: integer
+          title: Approximate Order Limit
+        approximate_bin_opening_limit:
+          type: integer
+          title: Approximate Bin Opening Limit
+        max_cart_items:
+          type: integer
+          title: Max Cart Items
+        hub_status:
+          $ref: '#/components/schemas/HubStatus'
+      type: object
+      required:
+      - id
+      - name
+      - country
+      - state
+      - city
+      - postal_code
+      - street_address_1
+      - approximate_order_limit
+      - approximate_bin_opening_limit
+      - max_cart_items
+      - hub_status
+      title: HubUserCurrentResponse
+    HubStatus:
+      type: string
+      enum:
+      - active
+      - maintenance
+      - restocking
+      - hidden
+      title: HubStatus
+    HubDefaultRequest:
+      properties:
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+      type: object
+      title: HubDefaultRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GeoJsonLocation:
+      properties:
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: Point
+        coordinates:
+          items:
+            type: number
+          type: array
+          title: Coordinates
+      type: object
+      required:
+      - coordinates
+      title: GeoJsonLocation

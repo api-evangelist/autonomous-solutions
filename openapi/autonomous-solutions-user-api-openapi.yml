@@ -1,0 +1,1242 @@
+openapi: 3.2.0
+info:
+  title: Vencart User API
+  version: 0.1.0
+tags:
+- name: User
+paths:
+  /users/user:
+    get:
+      tags:
+      - User
+      summary: Get User Data With Hub
+      operationId: get_user_data_with_hub_users_user_get
+      responses:
+        '200':
+          description: user data exists and delivered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDataRetrieve'
+    post:
+      tags:
+      - User
+      summary: Create User
+      operationId: create_user_users_user_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '201':
+          description: user successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreateRetrieve'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      deprecated: true
+    delete:
+      tags:
+      - User
+      summary: Delete User
+      operationId: delete_user_users_user_delete
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '204':
+          description: user successfully deleted
+  /users/user/bootstrap:
+    post:
+      tags:
+      - User
+      summary: Bootstrap User
+      operationId: bootstrap_user_users_user_bootstrap_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserBootstrap'
+        required: true
+      responses:
+        '201':
+          description: User bootstrapped (or returned if already existed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserBootstrapResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/bootstrap/guest:
+    post:
+      tags:
+      - User
+      summary: Bootstrap Guest User
+      operationId: bootstrap_guest_user_users_user_bootstrap_guest_post
+      responses:
+        '201':
+          description: Anonymous guest user bootstrapped (or returned if already existed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserBootstrapResponse'
+  /users/user/exists:
+    get:
+      tags:
+      - User
+      summary: Check User Exists
+      operationId: check_user_exists_users_user_exists_get
+      parameters:
+      - name: phone_number
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Phone Number
+      responses:
+        '200':
+          description: user exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserExists'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/exists/phone:
+    get:
+      tags:
+      - User
+      summary: Check User Exists Unauthenticated
+      operationId: check_user_exists_unauthenticated_users_user_exists_phone_get
+      parameters:
+      - name: phone_number
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Phone Number
+      responses:
+        '200':
+          description: user exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserExists'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/exists/email:
+    get:
+      tags:
+      - User
+      summary: Check User Exists By Email Unauthenticated
+      operationId: check_user_exists_by_email_unauthenticated_users_user_exists_email_get
+      parameters:
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Email
+      responses:
+        '200':
+          description: user exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserExists'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/profile:
+    get:
+      tags:
+      - User
+      summary: Get User Profile
+      operationId: get_user_profile_users_user_profile_get
+      responses:
+        '200':
+          description: user profile successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileRetrieve'
+    patch:
+      tags:
+      - User
+      summary: Update User Profile
+      operationId: update_user_profile_users_user_profile_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileUpdate'
+        required: true
+      responses:
+        '200':
+          description: user profile successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileRetrieve'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/me/profile:
+    patch:
+      tags:
+      - User
+      summary: Patch User Me Profile
+      operationId: patch_user_me_profile_users_user_me_profile_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfilePatch'
+        required: true
+      responses:
+        '200':
+          description: Profile patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileMeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/profile/image:
+    delete:
+      tags:
+      - User
+      summary: Delete User Profile Image
+      operationId: delete_user_profile_image_users_user_profile_image_delete
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '204':
+          description: user profile image successfully deleted
+    patch:
+      tags:
+      - User
+      summary: Update User Profile Image
+      operationId: update_user_profile_image_users_user_profile_image_patch
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_update_user_profile_image_users_user_profile_image_patch'
+        required: true
+      responses:
+        '200':
+          description: user profile image successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileImage'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/hub/{hub_id}:
+    post:
+      tags:
+      - User
+      summary: Select User Hub
+      operationId: select_user_hub_users_user_hub__hub_id__post
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: User selected hub
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HubUserCurrentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - User
+      summary: Unselect User Hub
+      operationId: unselect_user_hub_users_user_hub__hub_id__delete
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '204':
+          description: User deleted selected hub
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/default-hub:
+    post:
+      tags:
+      - User
+      summary: Select User Default Hub
+      operationId: select_user_default_hub_users_user_default_hub_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HubDefaultRequest'
+        required: true
+      responses:
+        '200':
+          description: Set default hub for user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HubUserCurrentResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/fcm-configs:
+    post:
+      tags:
+      - User
+      summary: Create Fcm Config
+      operationId: create_fcm_config_users_user_fcm_configs_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFCMConfigCreateSchema'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - User
+      summary: Delete Fcm Config
+      operationId: delete_fcm_config_users_user_fcm_configs_delete
+      parameters:
+      - name: device_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Device Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/firebase-id:
+    put:
+      tags:
+      - User
+      summary: Update User Firebase Id
+      description: 'Update a user''s Firebase ID by phone number or email.
+
+
+        This endpoint verifies the Firebase token and updates the user''s Firebase ID
+
+        in the database based on their phone number or email.
+
+
+        The authenticated user must be the same as the user being updated.'
+      operationId: update_user_firebase_id_users_user_firebase_id_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFirebaseIdUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successfully updated Firebase user ID
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Update User Firebase Id Users User Firebase Id Put
+              example:
+                message: Firebase user ID successfully updated
+        '401':
+          description: Invalid or expired token
+        '403':
+          description: Not authorized to update this user's Firebase ID
+        '404':
+          description: User not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/transfer-anon-order:
+    post:
+      tags:
+      - User
+      summary: Transfer Anon Order
+      description: 'Transfer a NEW (unpaid) order from an anonymous backend user to the authenticated user.
+
+
+        Called immediately after a guest logs into (or creates) an account via checkout OTP,
+
+        when Firebase UID linking replaced the anonymous session with a real account and the
+
+        pre-auth backend user ID differs from the post-auth backend user ID.
+
+
+        Returns 404 if the order is not found on the anonymous user.
+
+        If the authenticated user already has an active order with items at the same
+
+        hub, merges the anonymous order into it and returns that existing order.
+
+        Returns 409 if the order is already paid.'
+      operationId: transfer_anon_order_users_user_transfer_anon_order_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferAnonOrderRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferAnonOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    UserProfileRetrieve:
+      properties:
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: string
+            const: ''
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        image_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Image Url
+        selected_hub_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Selected Hub Id
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+          default: false
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+          default: false
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        loyalty_points:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Loyalty Points
+          default: 0
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - firebase_user_id
+      - id
+      - created_at
+      - updated_at
+      title: UserProfileRetrieve
+    TransferAnonOrderResponse:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        hub_id:
+          type: integer
+          title: Hub Id
+      type: object
+      required:
+      - order_id
+      - hub_id
+      title: TransferAnonOrderResponse
+    UserProfileImage:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: UserProfileImage
+    UserFCMConfigCreateSchema:
+      properties:
+        fcm_token:
+          type: string
+          title: Fcm Token
+        device_id:
+          type: string
+          title: Device Id
+        device_type:
+          $ref: '#/components/schemas/DeviceTypeEnum'
+      type: object
+      required:
+      - fcm_token
+      - device_id
+      - device_type
+      title: UserFCMConfigCreateSchema
+    HubUserCurrentResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        country:
+          type: string
+          title: Country
+        state:
+          type: string
+          title: State
+        city:
+          type: string
+          title: City
+        postal_code:
+          type: string
+          title: Postal Code
+        street_address_1:
+          type: string
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        tax_rates:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Tax Rates
+        timezone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Timezone
+        approximate_order_limit:
+          type: integer
+          title: Approximate Order Limit
+        approximate_bin_opening_limit:
+          type: integer
+          title: Approximate Bin Opening Limit
+        max_cart_items:
+          type: integer
+          title: Max Cart Items
+        hub_status:
+          $ref: '#/components/schemas/HubStatus'
+      type: object
+      required:
+      - id
+      - name
+      - country
+      - state
+      - city
+      - postal_code
+      - street_address_1
+      - approximate_order_limit
+      - approximate_bin_opening_limit
+      - max_cart_items
+      - hub_status
+      title: HubUserCurrentResponse
+    HubDefaultRequest:
+      properties:
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+      type: object
+      title: HubDefaultRequest
+    UserProfilePatch:
+      properties:
+        first_name:
+          type: string
+          minLength: 1
+          title: First Name
+        last_name:
+          type: string
+          minLength: 1
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - first_name
+      - last_name
+      title: UserProfilePatch
+      description: Body for PATCH /users/me/profile — supplies fields currently null on the user row.
+    UserExists:
+      properties:
+        exists:
+          type: boolean
+          title: Exists
+        firebase_user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Firebase User Id
+      type: object
+      required:
+      - exists
+      title: UserExists
+    DeviceTypeEnum:
+      type: string
+      enum:
+      - ios
+      - android
+      title: DeviceTypeEnum
+    TransferAnonOrderRequest:
+      properties:
+        anon_user_id:
+          type: integer
+          title: Anon User Id
+        order_id:
+          type: integer
+          title: Order Id
+      type: object
+      required:
+      - anon_user_id
+      - order_id
+      title: TransferAnonOrderRequest
+    UserFirebaseIdUpdate:
+      properties:
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+      type: object
+      required:
+      - firebase_user_id
+      title: UserFirebaseIdUpdate
+    UserDataRetrieve:
+      properties:
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: string
+            const: ''
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        image_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Image Url
+        selected_hub_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Selected Hub Id
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+          default: false
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+          default: false
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        current_order_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Current Order Id
+        loyalty_points:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Loyalty Points
+          default: 0
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        selected_hub:
+          anyOf:
+          - $ref: '#/components/schemas/HubUserCurrentResponse'
+          - type: 'null'
+      type: object
+      required:
+      - firebase_user_id
+      - id
+      - created_at
+      - updated_at
+      title: UserDataRetrieve
+    UserCreateRetrieve:
+      properties:
+        id:
+          type: integer
+          title: Id
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        selected_hub_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Selected Hub Id
+      type: object
+      required:
+      - id
+      - firebase_user_id
+      title: UserCreateRetrieve
+    UserBootstrap:
+      properties:
+        channel:
+          $ref: '#/components/schemas/ContactChannel'
+        value:
+          type: string
+          minLength: 1
+          title: Value
+      type: object
+      required:
+      - channel
+      - value
+      title: UserBootstrap
+      description: Body for POST /users/bootstrap — Firebase verified the contact channel already.
+    UserCreate:
+      properties:
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: string
+            const: ''
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        image_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Image Url
+        selected_hub_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Selected Hub Id
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+          default: false
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+          default: false
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+      type: object
+      required:
+      - firebase_user_id
+      title: UserCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GeoJsonLocation:
+      properties:
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: Point
+        coordinates:
+          items:
+            type: number
+          type: array
+          title: Coordinates
+      type: object
+      required:
+      - coordinates
+      title: GeoJsonLocation
+    UserProfileUpdate:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+      type: object
+      title: UserProfileUpdate
+    ContactChannel:
+      type: string
+      enum:
+      - email
+      - phone
+      title: ContactChannel
+    UserProfileMeResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+      type: object
+      required:
+      - id
+      - firebase_user_id
+      - profile_complete
+      title: UserProfileMeResponse
+      description: Response for PATCH /user/me/profile — null-safe during progressive signup.
+    Body_update_user_profile_image_users_user_profile_image_patch:
+      properties:
+        files:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Files
+      type: object
+      required:
+      - files
+      title: Body_update_user_profile_image_users_user_profile_image_patch
+    HubStatus:
+      type: string
+      enum:
+      - active
+      - maintenance
+      - restocking
+      - hidden
+      title: HubStatus
+    UserBootstrapResponse:
+      properties:
+        user_id:
+          type: integer
+          title: User Id
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+      type: object
+      required:
+      - user_id
+      - profile_complete
+      title: UserBootstrapResponse

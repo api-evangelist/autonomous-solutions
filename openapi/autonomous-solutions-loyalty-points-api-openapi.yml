@@ -1,0 +1,157 @@
+openapi: 3.2.0
+info:
+  title: Vencart Loyalty Points API
+  version: 0.1.0
+tags:
+- name: loyalty-points
+paths:
+  /users/loyalty/balance:
+    get:
+      tags:
+      - loyalty-points
+      summary: Get Loyalty Balance
+      description: 'Get the current VenBucks balance for the authenticated user.
+
+
+        Returns:
+
+        - loyalty_points: Current VenBucks balance
+
+        - points_value_in_cents: Monetary value of points in cents'
+      operationId: get_loyalty_balance_users_loyalty_balance_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoyaltyPointsBalanceSchema'
+  /users/loyalty/calculate-earnings:
+    post:
+      tags:
+      - loyalty-points
+      summary: Calculate Potential Earnings
+      description: 'Calculate how many VenBucks will be earned for a given order subtotal.
+
+
+        This endpoint helps the frontend display potential earnings before checkout.
+
+        VenBucks are earned based on the order subtotal (after deal discounts, before tax).
+
+
+        Args:
+
+        order_total_cents: The order subtotal in cents (after deal discounts, before tax)
+
+
+        Returns:
+
+        - order_total: The input order subtotal
+
+        - points_to_earn: VenBucks that will be earned
+
+        - points_value: Monetary value of the points'
+      operationId: calculate_potential_earnings_users_loyalty_calculate_earnings_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoyaltyPointsCalculationSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    LoyaltyPointsBalanceSchema:
+      properties:
+        loyalty_points:
+          type: integer
+          title: Loyalty Points
+          description: Current VenBucks balance
+        points_value_in_cents:
+          type: integer
+          title: Points Value In Cents
+          description: Monetary value of points in cents
+      type: object
+      required:
+      - loyalty_points
+      - points_value_in_cents
+      title: LoyaltyPointsBalanceSchema
+      description: Schema for user's loyalty points balance
+    LoyaltyPointsCalculationSchema:
+      properties:
+        order_total:
+          type: integer
+          title: Order Total
+          description: Order total in cents
+        points_to_earn:
+          type: integer
+          title: Points To Earn
+          description: VenBucks that will be earned
+        points_value:
+          type: integer
+          title: Points Value
+          description: Monetary value in cents
+      type: object
+      required:
+      - order_total
+      - points_to_earn
+      - points_value
+      title: LoyaltyPointsCalculationSchema
+      description: Schema for calculating potential points for an order
+    Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post:
+      properties:
+        order_total_cents:
+          type: integer
+          title: Order Total Cents
+          description: Order subtotal in cents (after deal discounts, before tax)
+      type: object
+      required:
+      - order_total_cents
+      title: Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

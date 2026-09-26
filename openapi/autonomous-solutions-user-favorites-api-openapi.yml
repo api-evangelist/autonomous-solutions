@@ -1,0 +1,332 @@
+openapi: 3.2.0
+info:
+  title: Vencart User Favorites API
+  version: 0.1.0
+tags:
+- name: user-favorites
+paths:
+  /hubs/{hub_id}/favorite-products:
+    get:
+      tags:
+      - user-favorites
+      summary: Get User Favorites
+      operationId: get_user_favorites_hubs__hub_id__favorite_products_get
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: List of products successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductRetrieveSchema'
+                title: Response 200 Get User Favorites Hubs  Hub Id  Favorite Products Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - user-favorites
+      summary: Add User Favorite
+      operationId: add_user_favorite_hubs__hub_id__favorite_products_post
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      - name: product_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Product Id
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /hubs/{hub_id}/favorite-products/{product_id}:
+    delete:
+      tags:
+      - user-favorites
+      summary: Delete User Favorite
+      operationId: delete_user_favorite_hubs__hub_id__favorite_products__product_id__delete
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Product Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    SimilarProductSchema:
+      properties:
+        name:
+          type: string
+          title: Name
+        image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Url
+        upc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Upc
+        original_price:
+          type: integer
+          title: Original Price
+        discounted_price:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Discounted Price
+        quantity_in_stock:
+          type: integer
+          title: Quantity In Stock
+        max_per_order:
+          type: integer
+          title: Max Per Order
+        subcategory_id:
+          type: integer
+          title: Subcategory Id
+        category_id:
+          type: integer
+          title: Category Id
+        hub_id:
+          type: integer
+          title: Hub Id
+        is_favorite:
+          type: boolean
+          title: Is Favorite
+        id:
+          type: integer
+          title: Id
+        subcategory:
+          type: string
+          title: Subcategory
+        category:
+          type: string
+          title: Category
+      type: object
+      required:
+      - name
+      - image_url
+      - upc
+      - original_price
+      - quantity_in_stock
+      - max_per_order
+      - subcategory_id
+      - category_id
+      - hub_id
+      - is_favorite
+      - id
+      - subcategory
+      - category
+      title: SimilarProductSchema
+    ProductTaxType:
+      type: string
+      enum:
+      - sales_tax
+      - bottle_tax
+      - no_tax
+      - unknown_tax
+      title: ProductTaxType
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ProductRetrieveSchema:
+      properties:
+        name:
+          type: string
+          title: Name
+        image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Url
+        upc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Upc
+        original_price:
+          type: integer
+          title: Original Price
+        discounted_price:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Discounted Price
+        quantity_in_stock:
+          type: integer
+          title: Quantity In Stock
+        max_per_order:
+          type: integer
+          title: Max Per Order
+        subcategory_id:
+          type: integer
+          title: Subcategory Id
+        category_id:
+          type: integer
+          title: Category Id
+        hub_id:
+          type: integer
+          title: Hub Id
+        is_favorite:
+          type: boolean
+          title: Is Favorite
+        id:
+          type: integer
+          title: Id
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        subcategory:
+          type: string
+          title: Subcategory
+        category:
+          type: string
+          title: Category
+        quantity_in_basket:
+          type: integer
+          title: Quantity In Basket
+        tax_type:
+          $ref: '#/components/schemas/ProductTaxType'
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+        nutrition:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Nutrition
+        tax_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tax Code
+        similar_products:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SimilarProductSchema'
+            type: array
+          - type: 'null'
+          title: Similar Products
+        deal_ids:
+          items:
+            type: integer
+          type: array
+          title: Deal Ids
+          default: []
+      type: object
+      required:
+      - name
+      - image_url
+      - upc
+      - original_price
+      - quantity_in_stock
+      - max_per_order
+      - subcategory_id
+      - category_id
+      - hub_id
+      - is_favorite
+      - id
+      - subcategory
+      - category
+      - quantity_in_basket
+      - tax_type
+      title: ProductRetrieveSchema

@@ -1,0 +1,22 @@
+generated: '2026-09-26'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://developer.venhub.com/docs/rate-limits.html
+sources:
+- https://developer.venhub.com/docs/rate-limits.html
+name: VenHub rate limits
+limits:
+- name: Default Limit
+  limit_text: 360 requests / minute
+  max: 360
+  window: minute
+  endpoint: All endpoints not listed under Reduced Limit
+- name: Reduced Limit
+  limit_text: 90 requests / minute
+  max: 90
+  window: minute
+  endpoint: GET /hubs, PUT /hubs/product/{product_id}/update_quantity, PUT /product/{product_id}/update_price, PUT /product/{product_id}/update_purchase_price,
+    PUT /product/{product_id}/update_upc, GET /gross_revenue, POST /owner/banners, DELETE /owner/banners/{banner_id}
+exhaustion_status: 429
+note: Rate limits are enforced per API key, per endpoint. Exceeding a limit returns a 429 response.
+docs: https://developer.venhub.com/docs/rate-limits.html

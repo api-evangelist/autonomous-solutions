@@ -1,0 +1,510 @@
+openapi: 3.2.0
+info:
+  title: Vencart Hubs API
+  version: 0.1.0
+tags:
+- name: Hubs
+paths:
+  /hubs/lookup:
+    post:
+      tags:
+      - Hubs
+      summary: Hub Lookup
+      operationId: hub_lookup_hubs_lookup_post
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 20
+          minimum: 0
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HubNameLookupRequest'
+      responses:
+        '200':
+          description: Hub lookup successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HubUserCurrentResponse'
+                title: Response 200 Hub Lookup Hubs Lookup Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /hubs/banners:
+    get:
+      tags:
+      - Hubs
+      summary: List Hub Banners
+      operationId: list_hub_banners_hubs_banners_get
+      parameters:
+      - name: hub_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /hubs/{hub_id}/status:
+    get:
+      tags:
+      - Hubs
+      summary: Get Hub Status
+      description: 'Get the status of a hub by its ID.
+
+
+        The status can be one of: ''active'', ''maintenance'', or ''restocking''.'
+      operationId: get_hub_status_hubs__hub_id__status_get
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: Hub status retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                title: Response Get Hub Status Hubs  Hub Id  Status Get
+              example: active
+        '404':
+          description: Hub not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - Hubs
+      summary: Update Hub Status
+      description: 'Update the status of a hub by its ID.
+
+
+        The status can be one of: ''active'', ''maintenance'', or ''restocking''.'
+      operationId: update_hub_status_hubs__hub_id__status_put
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HubStatusUpdateRequest'
+      responses:
+        '200':
+          description: Hub status updated successfully
+          content:
+            application/json:
+              schema: {}
+              example:
+                message: Hub status updated to 'maintenance'
+        '404':
+          description: Hub not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /hubs/{hub_id}/status/internal:
+    get:
+      tags:
+      - Hubs
+      summary: Get Hub Status Internal
+      description: 'Get the status of a hub by its ID (internal endpoint with IP whitelisting).
+
+
+        This endpoint uses IP-based authentication instead of token authentication.
+
+        Access is only allowed from whitelisted IP addresses (internal network).
+
+
+        The status can be one of: ''active'', ''maintenance'', or ''restocking''.'
+      operationId: get_hub_status_internal_hubs__hub_id__status_internal_get
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: Hub status retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: string
+                title: Response Get Hub Status Internal Hubs  Hub Id  Status Internal Get
+              example: active
+        '404':
+          description: Hub not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - Hubs
+      summary: Update Hub Status Internal
+      description: 'Update the status of a hub by its ID (internal endpoint with IP whitelisting).
+
+
+        This endpoint uses IP-based authentication instead of token authentication.
+
+        Access is only allowed from whitelisted IP addresses (internal network).
+
+
+        The status can be one of: ''active'', ''maintenance'', or ''restocking''.'
+      operationId: update_hub_status_internal_hubs__hub_id__status_internal_put
+      parameters:
+      - name: hub_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HubStatusUpdateRequest'
+      responses:
+        '200':
+          description: Hub status updated successfully
+          content:
+            application/json:
+              schema: {}
+              example:
+                message: Hub status updated to 'maintenance'
+        '404':
+          description: Hub not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /hubs/owner/banners:
+    get:
+      tags:
+      - Hubs
+      summary: List Hub Banners
+      operationId: list_hub_banners_hubs_owner_banners_get
+      parameters:
+      - name: hub_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Hubs
+      summary: Create Hub Banner
+      operationId: create_hub_banner_hubs_owner_banners_post
+      parameters:
+      - name: hub_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_create_hub_banner_hubs_owner_banners_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /hubs/owner/banners/{banner_id}:
+    delete:
+      tags:
+      - Hubs
+      summary: Delete Hub Banner
+      operationId: delete_hub_banner_hubs_owner_banners__banner_id__delete
+      parameters:
+      - name: banner_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Banner Id
+      - name: hub_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HubStatusUpdateRequest:
+      properties:
+        hub_status:
+          $ref: '#/components/schemas/HubStatus'
+      type: object
+      required:
+      - hub_status
+      title: HubStatusUpdateRequest
+    Body_create_hub_banner_hubs_owner_banners_post:
+      properties:
+        name:
+          type: string
+          title: Name
+        order_by:
+          type: integer
+          title: Order By
+        file:
+          type: string
+          contentMediaType: application/octet-stream
+          title: File
+      type: object
+      required:
+      - name
+      - order_by
+      - file
+      title: Body_create_hub_banner_hubs_owner_banners_post
+    HubUserCurrentResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        country:
+          type: string
+          title: Country
+        state:
+          type: string
+          title: State
+        city:
+          type: string
+          title: City
+        postal_code:
+          type: string
+          title: Postal Code
+        street_address_1:
+          type: string
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        tax_rates:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Tax Rates
+        timezone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Timezone
+        approximate_order_limit:
+          type: integer
+          title: Approximate Order Limit
+        approximate_bin_opening_limit:
+          type: integer
+          title: Approximate Bin Opening Limit
+        max_cart_items:
+          type: integer
+          title: Max Cart Items
+        hub_status:
+          $ref: '#/components/schemas/HubStatus'
+      type: object
+      required:
+      - id
+      - name
+      - country
+      - state
+      - city
+      - postal_code
+      - street_address_1
+      - approximate_order_limit
+      - approximate_bin_opening_limit
+      - max_cart_items
+      - hub_status
+      title: HubUserCurrentResponse
+    HubStatus:
+      type: string
+      enum:
+      - active
+      - maintenance
+      - restocking
+      - hidden
+      title: HubStatus
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HubNameLookupRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        multi_search:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Multi Search
+          default: true
+      type: object
+      title: HubNameLookupRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GeoJsonLocation:
+      properties:
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: Point
+        coordinates:
+          items:
+            type: number
+          type: array
+          title: Coordinates
+      type: object
+      required:
+      - coordinates
+      title: GeoJsonLocation

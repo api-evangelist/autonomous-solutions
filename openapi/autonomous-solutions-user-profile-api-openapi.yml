@@ -1,0 +1,425 @@
+openapi: 3.2.0
+info:
+  title: Vencart user profile API
+  version: 0.1.0
+tags:
+- name: user profile
+paths:
+  /users/user/profile:
+    get:
+      tags:
+      - user profile
+      summary: Get User Profile
+      operationId: get_user_profile_users_user_profile_get
+      responses:
+        '200':
+          description: user profile successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileRetrieve'
+    patch:
+      tags:
+      - user profile
+      summary: Update User Profile
+      operationId: update_user_profile_users_user_profile_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileUpdate'
+        required: true
+      responses:
+        '200':
+          description: user profile successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileRetrieve'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/me/profile:
+    patch:
+      tags:
+      - user profile
+      summary: Patch User Me Profile
+      operationId: patch_user_me_profile_users_user_me_profile_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfilePatch'
+        required: true
+      responses:
+        '200':
+          description: Profile patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileMeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /users/user/profile/image:
+    delete:
+      tags:
+      - user profile
+      summary: Delete User Profile Image
+      operationId: delete_user_profile_image_users_user_profile_image_delete
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '204':
+          description: user profile image successfully deleted
+    patch:
+      tags:
+      - user profile
+      summary: Update User Profile Image
+      operationId: update_user_profile_image_users_user_profile_image_patch
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_update_user_profile_image_users_user_profile_image_patch'
+        required: true
+      responses:
+        '200':
+          description: user profile image successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileImage'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    UserProfileUpdate:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+      type: object
+      title: UserProfileUpdate
+    UserProfileMeResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+      type: object
+      required:
+      - id
+      - firebase_user_id
+      - profile_complete
+      title: UserProfileMeResponse
+      description: Response for PATCH /user/me/profile — null-safe during progressive signup.
+    UserProfileRetrieve:
+      properties:
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: string
+            const: ''
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        image_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Image Url
+        selected_hub_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Selected Hub Id
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+          default: false
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+          default: false
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        loyalty_points:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Loyalty Points
+          default: 0
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - firebase_user_id
+      - id
+      - created_at
+      - updated_at
+      title: UserProfileRetrieve
+    Body_update_user_profile_image_users_user_profile_image_patch:
+      properties:
+        files:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Files
+      type: object
+      required:
+      - files
+      title: Body_update_user_profile_image_users_user_profile_image_patch
+    UserProfileImage:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: UserProfileImage
+    UserProfilePatch:
+      properties:
+        first_name:
+          type: string
+          minLength: 1
+          title: First Name
+        last_name:
+          type: string
+          minLength: 1
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - first_name
+      - last_name
+      title: UserProfilePatch
+      description: Body for PATCH /users/me/profile — supplies fields currently null on the user row.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GeoJsonLocation:
+      properties:
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: Point
+        coordinates:
+          items:
+            type: number
+          type: array
+          title: Coordinates
+      type: object
+      required:
+      - coordinates
+      title: GeoJsonLocation

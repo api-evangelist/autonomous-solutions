@@ -1,0 +1,604 @@
+openapi: 3.2.0
+info:
+  title: Vencart Guest Checkout API
+  version: 0.1.0
+tags:
+- name: guest-checkout
+paths:
+  /guests/session:
+    post:
+      tags:
+      - guest-checkout
+      summary: Create Guest Session
+      description: 'Start a guest checkout session.
+
+
+        Creates an ephemeral user, a Stripe customer, and an empty cart order for
+
+        the given hub. Returns a guest_token the client uses in the X-Guest-Token
+
+        header for all subsequent guest requests.
+
+
+        Optionally accepts FCM fields (fcm_token, device_id, device_type) to
+
+        register the device for push notifications in the same request.'
+      operationId: create_guest_session_guests_session_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestSessionCreateSchema'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestSessionResponseSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/contact:
+    post:
+      tags:
+      - guest-checkout
+      summary: Set Guest Contact
+      description: 'Set the guest''s contact info (email and/or phone) at checkout.
+
+
+        Updates the guest''s user row and Stripe customer so that Stripe-generated
+
+        receipts reach the right address. Returns 409 if the email/phone already
+
+        belongs to a registered account — the client should redirect to login.
+
+
+        Also saves the promotional email opt-in preference.'
+      operationId: set_guest_contact_guests_contact_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestContactSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/fcm-configs:
+    post:
+      tags:
+      - guest-checkout
+      summary: Register Guest Fcm Token
+      description: 'Register a device FCM token for the guest user.
+
+
+        Enables push notifications for order status updates without requiring a
+
+        Firebase account. Can alternatively be done inline in POST /guests/session.'
+      operationId: register_guest_fcm_token_guests_fcm_configs_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFCMConfigCreateSchema'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/payments/apple-pay:
+    post:
+      tags:
+      - guest-checkout
+      summary: Guest Apple Pay
+      description: 'Initialize Apple Pay for a guest order.
+
+
+        Returns client_secret, ephemeral_key, and customer_id for the Stripe
+
+        mobile SDK to display the Apple Pay sheet.'
+      operationId: guest_apple_pay_guests_payments_apple_pay_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplePayRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/payments/google-pay:
+    post:
+      tags:
+      - guest-checkout
+      summary: Guest Google Pay
+      description: 'Initialize Google Pay for a guest order.
+
+
+        Returns client_secret, ephemeral_key, and customer_id for the Stripe
+
+        mobile SDK to display the Google Pay sheet.'
+      operationId: guest_google_pay_guests_payments_google_pay_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePayRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/payments/confirm-payment:
+    post:
+      tags:
+      - guest-checkout
+      summary: Guest Confirm Payment
+      description: 'Confirm a wallet payment (Apple/Google Pay) after the user authorizes it.
+
+
+        On success, marks the guest session as converted so the expiry cleanup
+
+        task leaves it (and the associated order history) intact.'
+      operationId: guest_confirm_payment_guests_payments_confirm_payment_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmPaymentSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/payments/card:
+    post:
+      tags:
+      - guest-checkout
+      summary: Guest Pay With Card
+      description: 'One-time card payment for guests using a freshly tokenized Stripe card.
+
+
+        The client tokenizes the card via Stripe Elements / the mobile SDK and
+
+        passes the resulting pm_xxx ID. Unlike the saved-card flow, the card does
+
+        not need to be pre-attached to the Stripe customer.
+
+
+        On success, marks the guest session as converted.'
+      operationId: guest_pay_with_card_guests_payments_card_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestCardPaymentSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/orders:
+    get:
+      tags:
+      - guest-checkout
+      summary: List Guest Orders
+      description: 'List orders for a guest user with pagination and filtering.
+
+
+        Requires X-Guest-Token header for authentication.
+
+        Supports filtering by order processing statuses.'
+      operationId: list_guest_orders_guests_orders_get
+      parameters:
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: Size
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: Page
+      - name: order_by
+        in: query
+        required: false
+        schema:
+          type: string
+          default: created_at
+          title: Order By
+      - name: is_desc
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Is Desc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: array
+                items:
+                  type: integer
+              - type: 'null'
+              title: Order Processing Statuses
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/claim-order:
+    post:
+      tags:
+      - guest-checkout
+      summary: Claim Guest Order
+      description: 'Transfer a guest order to the authenticated user after login.
+
+
+        Called immediately after a guest logs into an existing account mid-checkout.
+
+        Validates the guest session, checks for order conflicts at the hub, and
+
+        reassigns the order to the authenticated user''s account.
+
+
+        Returns 404 if the guest session or order is not found.
+
+        Returns 409 if the order is already paid, or if the user has an existing
+
+        order with items at the same hub.'
+      operationId: claim_guest_order_guests_claim_order_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestClaimOrderSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestClaimOrderResponseSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /guests/orders/{order_id}:
+    get:
+      tags:
+      - guest-checkout
+      summary: Get Guest Order
+      description: 'Get order details for a guest user.
+
+
+        Requires X-Guest-Token header for authentication.
+
+        Returns the order with all items and product details.'
+      operationId: get_guest_order_guests_orders__order_id__get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Order Id
+      - name: hub_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          title: Hub Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    GuestSessionCreateSchema:
+      properties:
+        hub_id:
+          type: integer
+          title: Hub Id
+        fcm_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fcm Token
+        device_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Id
+        device_type:
+          anyOf:
+          - $ref: '#/components/schemas/DeviceTypeEnum'
+          - type: 'null'
+      type: object
+      required:
+      - hub_id
+      title: GuestSessionCreateSchema
+    GuestSessionResponseSchema:
+      properties:
+        guest_token:
+          type: string
+          title: Guest Token
+        guest_user_id:
+          type: integer
+          title: Guest User Id
+        order_id:
+          type: integer
+          title: Order Id
+      type: object
+      required:
+      - guest_token
+      - guest_user_id
+      - order_id
+      title: GuestSessionResponseSchema
+    GuestClaimOrderSchema:
+      properties:
+        guest_token:
+          type: string
+          title: Guest Token
+        order_id:
+          type: integer
+          title: Order Id
+      type: object
+      required:
+      - guest_token
+      - order_id
+      title: GuestClaimOrderSchema
+    GooglePayRequestSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      title: GooglePayRequestSchema
+    ConfirmPaymentSchema:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        payment_intent_id:
+          type: string
+          title: Payment Intent Id
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - success
+      - payment_intent_id
+      - order_id
+      title: ConfirmPaymentSchema
+    UserFCMConfigCreateSchema:
+      properties:
+        fcm_token:
+          type: string
+          title: Fcm Token
+        device_id:
+          type: string
+          title: Device Id
+        device_type:
+          $ref: '#/components/schemas/DeviceTypeEnum'
+      type: object
+      required:
+      - fcm_token
+      - device_id
+      - device_type
+      title: UserFCMConfigCreateSchema
+    GuestClaimOrderResponseSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+      type: object
+      required:
+      - order_id
+      title: GuestClaimOrderResponseSchema
+    DeviceTypeEnum:
+      type: string
+      enum:
+      - ios
+      - android
+      title: DeviceTypeEnum
+    ApplePayRequestSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      title: ApplePayRequestSchema
+    GuestContactSchema:
+      properties:
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        accepts_promotional_emails:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Accepts Promotional Emails
+          default: false
+      type: object
+      title: GuestContactSchema
+    GuestCardPaymentSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        stripe_payment_method_id:
+          type: string
+          title: Stripe Payment Method Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      - stripe_payment_method_id
+      title: GuestCardPaymentSchema
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

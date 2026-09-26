@@ -1,0 +1,721 @@
+{
+  "@context": {
+    "@vocab": "https://venhub.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "autonomous": "https://venhub.com/schema#",
+    "ActiveDealDisplaySchema": "autonomous:ActiveDealDisplaySchema",
+    "id": {
+      "@id": "autonomous:id",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "autonomous:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "autonomous:description"
+    },
+    "display_text": {
+      "@id": "autonomous:display_text"
+    },
+    "display_image": {
+      "@id": "autonomous:display_image"
+    },
+    "priority": {
+      "@id": "autonomous:priority",
+      "@type": "xsd:integer"
+    },
+    "ApplePayRequestSchema": "autonomous:ApplePayRequestSchema",
+    "order_id": {
+      "@id": "autonomous:order_id",
+      "@type": "xsd:integer"
+    },
+    "deal_id": {
+      "@id": "autonomous:deal_id"
+    },
+    "venbucks_to_redeem": {
+      "@id": "autonomous:venbucks_to_redeem"
+    },
+    "ApplyRewardRequestSchema": "autonomous:ApplyRewardRequestSchema",
+    "deal_ids": {
+      "@id": "autonomous:deal_ids",
+      "@container": "@list"
+    },
+    "hub_id": {
+      "@id": "autonomous:hub_id",
+      "@type": "xsd:integer"
+    },
+    "user_id": {
+      "@id": "autonomous:user_id"
+    },
+    "cart_items": {
+      "@id": "autonomous:cart_items",
+      "@container": "@list"
+    },
+    "device_uuid": {
+      "@id": "autonomous:device_uuid"
+    },
+    "ApplyRewardResponseSchema": "autonomous:ApplyRewardResponseSchema",
+    "success": {
+      "@id": "autonomous:success",
+      "@type": "xsd:boolean"
+    },
+    "deal_applied": {
+      "@id": "autonomous:deal_applied",
+      "@type": "xsd:string"
+    },
+    "modified_cart_items": {
+      "@id": "autonomous:modified_cart_items",
+      "@container": "@list"
+    },
+    "original_cart_total": {
+      "@id": "autonomous:original_cart_total",
+      "@type": "xsd:integer"
+    },
+    "discounted_cart_total": {
+      "@id": "autonomous:discounted_cart_total",
+      "@type": "xsd:integer"
+    },
+    "total_savings": {
+      "@id": "autonomous:total_savings",
+      "@type": "xsd:integer"
+    },
+    "message": {
+      "@id": "autonomous:message",
+      "@type": "xsd:string"
+    },
+    "BgTaskResponse": "autonomous:BgTaskResponse",
+    "job_id": {
+      "@id": "autonomous:job_id"
+    },
+    "BinStatus": "autonomous:BinStatus",
+    "bin_num": {
+      "@id": "autonomous:bin_num",
+      "@type": "xsd:integer"
+    },
+    "occurrence": {
+      "@id": "autonomous:occurrence"
+    },
+    "status_code": {
+      "@id": "autonomous:status_code",
+      "@type": "xsd:integer"
+    },
+    "is_ready": {
+      "@id": "autonomous:is_ready",
+      "@type": "xsd:boolean"
+    },
+    "is_dropped": {
+      "@id": "autonomous:is_dropped",
+      "@type": "xsd:boolean"
+    },
+    "Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post": "autonomous:Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post",
+    "order_total_cents": {
+      "@id": "autonomous:order_total_cents",
+      "@type": "xsd:integer"
+    },
+    "Body_create_deal_from_owner_deals_create_from_owner_post": "autonomous:Body_create_deal_from_owner_deals_create_from_owner_post",
+    "dealData": {
+      "@id": "autonomous:dealData",
+      "@type": "xsd:string"
+    },
+    "file": {
+      "@id": "autonomous:file",
+      "@type": "xsd:string"
+    },
+    "Body_create_hub_banner_hubs_owner_banners_post": "autonomous:Body_create_hub_banner_hubs_owner_banners_post",
+    "order_by": {
+      "@id": "autonomous:order_by",
+      "@type": "xsd:integer"
+    },
+    "Body_update_user_profile_image_users_user_profile_image_patch": "autonomous:Body_update_user_profile_image_users_user_profile_image_patch",
+    "files": {
+      "@id": "autonomous:files",
+      "@type": "xsd:string"
+    },
+    "CardPaymentRequestSchema": "autonomous:CardPaymentRequestSchema",
+    "payment_method_id": {
+      "@id": "autonomous:payment_method_id",
+      "@type": "xsd:string"
+    },
+    "CartItemSchema": "autonomous:CartItemSchema",
+    "product_id": {
+      "@id": "autonomous:product_id",
+      "@type": "xsd:integer"
+    },
+    "category_id": {
+      "@id": "autonomous:category_id"
+    },
+    "subcategory_id": {
+      "@id": "autonomous:subcategory_id"
+    },
+    "quantity": {
+      "@id": "autonomous:quantity",
+      "@type": "xsd:integer"
+    },
+    "unit_price": {
+      "@id": "autonomous:unit_price",
+      "@type": "xsd:integer"
+    },
+    "CeleryWorkerResponse": "autonomous:CeleryWorkerResponse",
+    "environment": {
+      "@id": "autonomous:environment",
+      "@type": "xsd:string"
+    },
+    "statistics": {
+      "@id": "autonomous:statistics"
+    },
+    "tasks": {
+      "@id": "autonomous:tasks"
+    },
+    "metrics": {
+      "@id": "autonomous:metrics",
+      "@container": "@list"
+    },
+    "CheckEligibilityRequestSchema": "autonomous:CheckEligibilityRequestSchema",
+    "cart_total": {
+      "@id": "autonomous:cart_total",
+      "@type": "xsd:integer"
+    },
+    "user_order_count": {
+      "@id": "autonomous:user_order_count"
+    },
+    "CheckEligibilityResponseSchema": "autonomous:CheckEligibilityResponseSchema",
+    "eligible_deals": {
+      "@id": "autonomous:eligible_deals",
+      "@container": "@list"
+    },
+    "ClientSecretSchema": "autonomous:ClientSecretSchema",
+    "client_secret": {
+      "@id": "autonomous:client_secret",
+      "@type": "xsd:string"
+    },
+    "ConfirmPaymentSchema": "autonomous:ConfirmPaymentSchema",
+    "payment_intent_id": {
+      "@id": "autonomous:payment_intent_id",
+      "@type": "xsd:string"
+    },
+    "ConstraintType": "autonomous:ConstraintType",
+    "ContactChannel": "autonomous:ContactChannel",
+    "DealConstraintBaseSchema": "autonomous:DealConstraintBaseSchema",
+    "constraint_type": {
+      "@id": "autonomous:constraint_type",
+      "@type": "@id"
+    },
+    "redemption_limit": {
+      "@id": "autonomous:redemption_limit"
+    },
+    "period": {
+      "@id": "autonomous:period"
+    },
+    "DealConstraintRetrieveSchema": "autonomous:DealConstraintRetrieveSchema",
+    "DealCreateSchema": "autonomous:DealCreateSchema",
+    "start": {
+      "@id": "autonomous:start",
+      "@type": "xsd:dateTime"
+    },
+    "end": {
+      "@id": "autonomous:end",
+      "@type": "xsd:dateTime"
+    },
+    "is_deal_active": {
+      "@id": "autonomous:is_deal_active",
+      "@type": "xsd:boolean"
+    },
+    "stackable": {
+      "@id": "autonomous:stackable",
+      "@type": "xsd:boolean"
+    },
+    "rewards": {
+      "@id": "autonomous:rewards",
+      "@container": "@list"
+    },
+    "triggers": {
+      "@id": "autonomous:triggers",
+      "@container": "@list"
+    },
+    "constraints": {
+      "@id": "autonomous:constraints",
+      "@container": "@list"
+    },
+    "DealRedemptionStatusSchema": "autonomous:DealRedemptionStatusSchema",
+    "deal_name": {
+      "@id": "autonomous:deal_name",
+      "@type": "xsd:string"
+    },
+    "total_redemptions": {
+      "@id": "autonomous:total_redemptions",
+      "@type": "xsd:integer"
+    },
+    "limit_reached": {
+      "@id": "autonomous:limit_reached",
+      "@type": "xsd:boolean"
+    },
+    "is_active": {
+      "@id": "autonomous:is_active",
+      "@type": "xsd:boolean"
+    },
+    "DealRetrieveSchema": "autonomous:DealRetrieveSchema",
+    "created_at": {
+      "@id": "autonomous:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "modified_at": {
+      "@id": "autonomous:modified_at",
+      "@type": "xsd:dateTime"
+    },
+    "DealRewardBaseSchema": "autonomous:DealRewardBaseSchema",
+    "reward_type": {
+      "@id": "autonomous:reward_type",
+      "@type": "@id"
+    },
+    "discount_pct_or_price": {
+      "@id": "autonomous:discount_pct_or_price",
+      "@type": "xsd:integer"
+    },
+    "DealRewardRetrieveSchema": "autonomous:DealRewardRetrieveSchema",
+    "DealTriggerBaseSchema": "autonomous:DealTriggerBaseSchema",
+    "trigger_type": {
+      "@id": "autonomous:trigger_type",
+      "@type": "@id"
+    },
+    "nth_order": {
+      "@id": "autonomous:nth_order"
+    },
+    "min_val_trigger": {
+      "@id": "autonomous:min_val_trigger"
+    },
+    "time_window_start": {
+      "@id": "autonomous:time_window_start"
+    },
+    "time_window_end": {
+      "@id": "autonomous:time_window_end"
+    },
+    "days_of_the_week": {
+      "@id": "autonomous:days_of_the_week"
+    },
+    "DealTriggerRetrieveSchema": "autonomous:DealTriggerRetrieveSchema",
+    "DealUpdateSchema": "autonomous:DealUpdateSchema",
+    "DeviceTypeEnum": "autonomous:DeviceTypeEnum",
+    "DroppedItem": "autonomous:DroppedItem",
+    "product_detail_id": {
+      "@id": "autonomous:product_detail_id",
+      "@type": "xsd:integer"
+    },
+    "EligibleDealSchema": "autonomous:EligibleDealSchema",
+    "reward_description": {
+      "@id": "autonomous:reward_description",
+      "@type": "xsd:string"
+    },
+    "potential_savings": {
+      "@id": "autonomous:potential_savings",
+      "@type": "xsd:integer"
+    },
+    "GeoJsonLocation": "autonomous:GeoJsonLocation",
+    "type": {
+      "@id": "autonomous:type"
+    },
+    "coordinates": {
+      "@id": "autonomous:coordinates",
+      "@container": "@list"
+    },
+    "GooglePayRequestSchema": "autonomous:GooglePayRequestSchema",
+    "GuestCardPaymentSchema": "autonomous:GuestCardPaymentSchema",
+    "stripe_payment_method_id": {
+      "@id": "autonomous:stripe_payment_method_id",
+      "@type": "xsd:string"
+    },
+    "GuestClaimOrderResponseSchema": "autonomous:GuestClaimOrderResponseSchema",
+    "GuestClaimOrderSchema": "autonomous:GuestClaimOrderSchema",
+    "guest_token": {
+      "@id": "autonomous:guest_token",
+      "@type": "xsd:string"
+    },
+    "GuestContactSchema": "autonomous:GuestContactSchema",
+    "email": {
+      "@id": "autonomous:email"
+    },
+    "phone": {
+      "@id": "autonomous:phone"
+    },
+    "accepts_promotional_emails": {
+      "@id": "autonomous:accepts_promotional_emails"
+    },
+    "GuestSessionCreateSchema": "autonomous:GuestSessionCreateSchema",
+    "fcm_token": {
+      "@id": "autonomous:fcm_token"
+    },
+    "device_id": {
+      "@id": "autonomous:device_id"
+    },
+    "device_type": {
+      "@id": "autonomous:device_type"
+    },
+    "GuestSessionResponseSchema": "autonomous:GuestSessionResponseSchema",
+    "guest_user_id": {
+      "@id": "autonomous:guest_user_id",
+      "@type": "xsd:integer"
+    },
+    "HTTPValidationError": "autonomous:HTTPValidationError",
+    "detail": {
+      "@id": "autonomous:detail",
+      "@container": "@list"
+    },
+    "HubDefaultRequest": "autonomous:HubDefaultRequest",
+    "geojson_location": {
+      "@id": "autonomous:geojson_location"
+    },
+    "HubEvent": "autonomous:HubEvent",
+    "message_type": {
+      "@id": "autonomous:message_type",
+      "@type": "@id"
+    },
+    "message_content": {
+      "@id": "autonomous:message_content",
+      "@type": "@id"
+    },
+    "HubMessageType": "autonomous:HubMessageType",
+    "HubNameLookupRequest": "autonomous:HubNameLookupRequest",
+    "multi_search": {
+      "@id": "autonomous:multi_search"
+    },
+    "HubStatus": "autonomous:HubStatus",
+    "HubStatusUpdateRequest": "autonomous:HubStatusUpdateRequest",
+    "hub_status": {
+      "@id": "autonomous:hub_status",
+      "@type": "@id"
+    },
+    "HubUserCurrentResponse": "autonomous:HubUserCurrentResponse",
+    "country": {
+      "@id": "autonomous:country",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "autonomous:state",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "autonomous:city",
+      "@type": "xsd:string"
+    },
+    "postal_code": {
+      "@id": "autonomous:postal_code",
+      "@type": "xsd:string"
+    },
+    "street_address_1": {
+      "@id": "autonomous:street_address_1",
+      "@type": "xsd:string"
+    },
+    "street_address_2": {
+      "@id": "autonomous:street_address_2"
+    },
+    "tax_rates": {
+      "@id": "autonomous:tax_rates"
+    },
+    "timezone": {
+      "@id": "autonomous:timezone"
+    },
+    "approximate_order_limit": {
+      "@id": "autonomous:approximate_order_limit",
+      "@type": "xsd:integer"
+    },
+    "approximate_bin_opening_limit": {
+      "@id": "autonomous:approximate_bin_opening_limit",
+      "@type": "xsd:integer"
+    },
+    "max_cart_items": {
+      "@id": "autonomous:max_cart_items",
+      "@type": "xsd:integer"
+    },
+    "JobStatusFindRequest": "autonomous:JobStatusFindRequest",
+    "args": {
+      "@id": "autonomous:args"
+    },
+    "status": {
+      "@id": "autonomous:status"
+    },
+    "JobStatusResponse": "autonomous:JobStatusResponse",
+    "updated_at": {
+      "@id": "autonomous:updated_at"
+    },
+    "LoyaltyPointsBalanceSchema": "autonomous:LoyaltyPointsBalanceSchema",
+    "loyalty_points": {
+      "@id": "autonomous:loyalty_points",
+      "@type": "xsd:integer"
+    },
+    "points_value_in_cents": {
+      "@id": "autonomous:points_value_in_cents",
+      "@type": "xsd:integer"
+    },
+    "LoyaltyPointsCalculationSchema": "autonomous:LoyaltyPointsCalculationSchema",
+    "order_total": {
+      "@id": "autonomous:order_total",
+      "@type": "xsd:integer"
+    },
+    "points_to_earn": {
+      "@id": "autonomous:points_to_earn",
+      "@type": "xsd:integer"
+    },
+    "points_value": {
+      "@id": "autonomous:points_value",
+      "@type": "xsd:integer"
+    },
+    "MessageContent": "autonomous:MessageContent",
+    "current_bin": {
+      "@id": "autonomous:current_bin"
+    },
+    "bins_status": {
+      "@id": "autonomous:bins_status"
+    },
+    "dropped_items": {
+      "@id": "autonomous:dropped_items"
+    },
+    "bin_nums": {
+      "@id": "autonomous:bin_nums",
+      "@container": "@list"
+    },
+    "hub_response_status_code": {
+      "@id": "autonomous:hub_response_status_code"
+    },
+    "ModifiedCartItemSchema": "autonomous:ModifiedCartItemSchema",
+    "original_unit_price": {
+      "@id": "autonomous:original_unit_price",
+      "@type": "xsd:integer"
+    },
+    "discounted_unit_price": {
+      "@id": "autonomous:discounted_unit_price",
+      "@type": "xsd:integer"
+    },
+    "discount_applied": {
+      "@id": "autonomous:discount_applied",
+      "@type": "xsd:boolean"
+    },
+    "quantity_discounted": {
+      "@id": "autonomous:quantity_discounted",
+      "@type": "xsd:integer"
+    },
+    "OrderOrderingField": "autonomous:OrderOrderingField",
+    "OrderProcessingStatus": "autonomous:OrderProcessingStatus",
+    "PaymentMethodAttachRequestSchema": "autonomous:PaymentMethodAttachRequestSchema",
+    "ProductRetrieveSchema": "autonomous:ProductRetrieveSchema",
+    "image_url": {
+      "@id": "autonomous:image_url"
+    },
+    "upc": {
+      "@id": "autonomous:upc"
+    },
+    "original_price": {
+      "@id": "autonomous:original_price",
+      "@type": "xsd:integer"
+    },
+    "discounted_price": {
+      "@id": "autonomous:discounted_price"
+    },
+    "quantity_in_stock": {
+      "@id": "autonomous:quantity_in_stock",
+      "@type": "xsd:integer"
+    },
+    "max_per_order": {
+      "@id": "autonomous:max_per_order",
+      "@type": "xsd:integer"
+    },
+    "is_favorite": {
+      "@id": "autonomous:is_favorite",
+      "@type": "xsd:boolean"
+    },
+    "subcategory": {
+      "@id": "autonomous:subcategory",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "autonomous:category",
+      "@type": "xsd:string"
+    },
+    "quantity_in_basket": {
+      "@id": "autonomous:quantity_in_basket",
+      "@type": "xsd:integer"
+    },
+    "tax_type": {
+      "@id": "autonomous:tax_type",
+      "@type": "@id"
+    },
+    "nutrition": {
+      "@id": "autonomous:nutrition"
+    },
+    "tax_code": {
+      "@id": "autonomous:tax_code"
+    },
+    "similar_products": {
+      "@id": "autonomous:similar_products"
+    },
+    "ProductTaxType": "autonomous:ProductTaxType",
+    "RewardType": "autonomous:RewardType",
+    "SimilarProductSchema": "autonomous:SimilarProductSchema",
+    "SysInfoResponse": "autonomous:SysInfoResponse",
+    "platform": {
+      "@id": "autonomous:platform"
+    },
+    "usage": {
+      "@id": "autonomous:usage"
+    },
+    "app_settings": {
+      "@id": "autonomous:app_settings"
+    },
+    "TransferAnonOrderRequest": "autonomous:TransferAnonOrderRequest",
+    "anon_user_id": {
+      "@id": "autonomous:anon_user_id",
+      "@type": "xsd:integer"
+    },
+    "TransferAnonOrderResponse": "autonomous:TransferAnonOrderResponse",
+    "TriggerType": "autonomous:TriggerType",
+    "UpdateNotificationReadStatusSchema": "autonomous:UpdateNotificationReadStatusSchema",
+    "is_read": {
+      "@id": "autonomous:is_read",
+      "@type": "xsd:boolean"
+    },
+    "UpdateOrderItemSchema": "autonomous:UpdateOrderItemSchema",
+    "UserBootstrap": "autonomous:UserBootstrap",
+    "channel": {
+      "@id": "autonomous:channel",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "autonomous:value",
+      "@type": "xsd:string"
+    },
+    "UserBootstrapResponse": "autonomous:UserBootstrapResponse",
+    "profile_complete": {
+      "@id": "autonomous:profile_complete",
+      "@type": "xsd:boolean"
+    },
+    "UserCreate": "autonomous:UserCreate",
+    "firebase_user_id": {
+      "@id": "autonomous:firebase_user_id",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "autonomous:first_name"
+    },
+    "last_name": {
+      "@id": "autonomous:last_name"
+    },
+    "birthday": {
+      "@id": "autonomous:birthday"
+    },
+    "phone_num": {
+      "@id": "autonomous:phone_num"
+    },
+    "selected_hub_id": {
+      "@id": "autonomous:selected_hub_id"
+    },
+    "is_migrated": {
+      "@id": "autonomous:is_migrated"
+    },
+    "UserCreateRetrieve": "autonomous:UserCreateRetrieve",
+    "UserDataRetrieve": "autonomous:UserDataRetrieve",
+    "current_order_id": {
+      "@id": "autonomous:current_order_id"
+    },
+    "selected_hub": {
+      "@id": "autonomous:selected_hub"
+    },
+    "UserExists": "autonomous:UserExists",
+    "exists": {
+      "@id": "autonomous:exists",
+      "@type": "xsd:boolean"
+    },
+    "UserFCMConfigCreateSchema": "autonomous:UserFCMConfigCreateSchema",
+    "UserFirebaseIdUpdate": "autonomous:UserFirebaseIdUpdate",
+    "phone_number": {
+      "@id": "autonomous:phone_number"
+    },
+    "UserProfileImage": "autonomous:UserProfileImage",
+    "url": {
+      "@id": "autonomous:url",
+      "@type": "xsd:string"
+    },
+    "UserProfileMeResponse": "autonomous:UserProfileMeResponse",
+    "UserProfilePatch": "autonomous:UserProfilePatch",
+    "UserProfileRetrieve": "autonomous:UserProfileRetrieve",
+    "UserProfileUpdate": "autonomous:UserProfileUpdate",
+    "ValidationError": "autonomous:ValidationError",
+    "loc": {
+      "@id": "autonomous:loc",
+      "@container": "@list"
+    },
+    "msg": {
+      "@id": "autonomous:msg",
+      "@type": "xsd:string"
+    },
+    "input": {
+      "@id": "autonomous:input"
+    },
+    "ctx": {
+      "@id": "autonomous:ctx"
+    },
+    "WalletBalanceResponse": "autonomous:WalletBalanceResponse",
+    "balance": {
+      "@id": "autonomous:balance",
+      "@type": "xsd:string"
+    },
+    "last_transaction_at": {
+      "@id": "autonomous:last_transaction_at"
+    },
+    "WalletDebitRequest": "autonomous:WalletDebitRequest",
+    "amount": {
+      "@id": "autonomous:amount"
+    },
+    "WalletDepositRequest": "autonomous:WalletDepositRequest",
+    "WalletDepositResponse": "autonomous:WalletDepositResponse",
+    "WalletTransactionResponse": "autonomous:WalletTransactionResponse",
+    "transaction_type": {
+      "@id": "autonomous:transaction_type",
+      "@type": "xsd:string"
+    },
+    "balance_after": {
+      "@id": "autonomous:balance_after",
+      "@type": "xsd:string"
+    },
+    "stripe_payment_intent_id": {
+      "@id": "autonomous:stripe_payment_intent_id"
+    },
+    "transaction_metadata": {
+      "@id": "autonomous:transaction_metadata"
+    },
+    "created_by": {
+      "@id": "autonomous:created_by"
+    },
+    "idempotency_key": {
+      "@id": "autonomous:idempotency_key",
+      "@type": "xsd:string"
+    },
+    "ZendeskWebhookRequest": "autonomous:ZendeskWebhookRequest",
+    "account_id": {
+      "@id": "autonomous:account_id",
+      "@type": "xsd:integer"
+    },
+    "time": {
+      "@id": "autonomous:time",
+      "@type": "xsd:string"
+    },
+    "zendesk_event_version": {
+      "@id": "autonomous:zendesk_event_version",
+      "@type": "xsd:string"
+    },
+    "subject": {
+      "@id": "autonomous:subject",
+      "@type": "xsd:string"
+    },
+    "event": {
+      "@id": "autonomous:event"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "VenHub API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects VenHub's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-09-26) from openapi/autonomous-solutions-openapi.json.",
+  "dcterms:created": "2026-09-26",
+  "dcterms:source": [
+    "openapi/autonomous-solutions-openapi.json"
+  ]
+}

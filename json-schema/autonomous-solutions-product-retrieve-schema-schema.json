@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/autonomous-solutions/main/json-schema/autonomous-solutions-product-retrieve-schema-schema.json",
+  "title": "ProductRetrieveSchema",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/autonomous-solutions-openapi.json#/components/schemas/ProductRetrieveSchema",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "image_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Image Url"
+    },
+    "upc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Upc"
+    },
+    "original_price": {
+      "type": "integer",
+      "title": "Original Price"
+    },
+    "discounted_price": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Discounted Price"
+    },
+    "quantity_in_stock": {
+      "type": "integer",
+      "title": "Quantity In Stock"
+    },
+    "max_per_order": {
+      "type": "integer",
+      "title": "Max Per Order"
+    },
+    "subcategory_id": {
+      "type": "integer",
+      "title": "Subcategory Id"
+    },
+    "category_id": {
+      "type": "integer",
+      "title": "Category Id"
+    },
+    "hub_id": {
+      "type": "integer",
+      "title": "Hub Id"
+    },
+    "is_favorite": {
+      "type": "boolean",
+      "title": "Is Favorite"
+    },
+    "id": {
+      "type": "integer",
+      "title": "Id"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Description"
+    },
+    "subcategory": {
+      "type": "string",
+      "title": "Subcategory"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "quantity_in_basket": {
+      "type": "integer",
+      "title": "Quantity In Basket"
+    },
+    "tax_type": {
+      "$ref": "#/$defs/ProductTaxType"
+    },
+    "type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Type"
+    },
+    "nutrition": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Nutrition"
+    },
+    "tax_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Tax Code"
+    },
+    "similar_products": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/SimilarProductSchema"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Similar Products"
+    },
+    "deal_ids": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array",
+      "title": "Deal Ids",
+      "default": []
+    }
+  },
+  "type": "object",
+  "required": [
+    "name",
+    "image_url",
+    "upc",
+    "original_price",
+    "quantity_in_stock",
+    "max_per_order",
+    "subcategory_id",
+    "category_id",
+    "hub_id",
+    "is_favorite",
+    "id",
+    "subcategory",
+    "category",
+    "quantity_in_basket",
+    "tax_type"
+  ],
+  "$defs": {
+    "ProductTaxType": {
+      "type": "string",
+      "enum": [
+        "sales_tax",
+        "bottle_tax",
+        "no_tax",
+        "unknown_tax"
+      ],
+      "title": "ProductTaxType"
+    },
+    "SimilarProductSchema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "image_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Image Url"
+        },
+        "upc": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Upc"
+        },
+        "original_price": {
+          "type": "integer",
+          "title": "Original Price"
+        },
+        "discounted_price": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Discounted Price"
+        },
+        "quantity_in_stock": {
+          "type": "integer",
+          "title": "Quantity In Stock"
+        },
+        "max_per_order": {
+          "type": "integer",
+          "title": "Max Per Order"
+        },
+        "subcategory_id": {
+          "type": "integer",
+          "title": "Subcategory Id"
+        },
+        "category_id": {
+          "type": "integer",
+          "title": "Category Id"
+        },
+        "hub_id": {
+          "type": "integer",
+          "title": "Hub Id"
+        },
+        "is_favorite": {
+          "type": "boolean",
+          "title": "Is Favorite"
+        },
+        "id": {
+          "type": "integer",
+          "title": "Id"
+        },
+        "subcategory": {
+          "type": "string",
+          "title": "Subcategory"
+        },
+        "category": {
+          "type": "string",
+          "title": "Category"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "image_url",
+        "upc",
+        "original_price",
+        "quantity_in_stock",
+        "max_per_order",
+        "subcategory_id",
+        "category_id",
+        "hub_id",
+        "is_favorite",
+        "id",
+        "subcategory",
+        "category"
+      ],
+      "title": "SimilarProductSchema"
+    }
+  }
+}

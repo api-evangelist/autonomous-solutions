@@ -1,0 +1,191 @@
+openapi: 3.2.0
+info:
+  title: Vencart Vensmart API
+  version: 0.1.0
+tags:
+- name: vensmart
+paths:
+  /webhooks/vensmart/orders:
+    post:
+      tags:
+      - vensmart
+      summary: Handle Hub Event
+      operationId: handle_hub_event_webhooks_vensmart_orders_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HubEvent'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    MessageContent:
+      properties:
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+        order_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Order Id
+        status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status Code
+        current_bin:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Current Bin
+        bin_num:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Bin Num
+        bins_status:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/BinStatus'
+            type: array
+          - type: 'null'
+          title: Bins Status
+        dropped_items:
+          additionalProperties:
+            $ref: '#/components/schemas/DroppedItem'
+          type: object
+          title: Dropped Items
+          default: {}
+        bin_nums:
+          items:
+            type: integer
+          type: array
+          title: Bin Nums
+          default: []
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        hub_response_status_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Hub Response Status Code
+      type: object
+      title: MessageContent
+    HubMessageType:
+      type: string
+      enum:
+      - info
+      - warning
+      - error
+      - update
+      - heartbeat
+      - notification
+      - order_completed
+      - order_update
+      - order_started
+      - door_opened
+      title: HubMessageType
+    BinStatus:
+      properties:
+        bin_num:
+          type: integer
+          title: Bin Num
+        occurrence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Occurrence
+        status_code:
+          type: integer
+          title: Status Code
+        is_ready:
+          type: boolean
+          title: Is Ready
+          default: false
+        is_dropped:
+          type: boolean
+          title: Is Dropped
+          default: false
+      type: object
+      required:
+      - bin_num
+      - status_code
+      title: BinStatus
+      description: "Status information for an individual bin.\n\nAttributes:\n    bin_num: The bin number\n    occurrence: The occurrence count for this bin (for handling multiple bins with the same number)\n    status_code: VensmartStatusCode indicating the bin's current state\n    is_ready: Whether the bin is ready to be opened\n    is_dropped: Whether all items in this bin were dropped"
+    HubEvent:
+      properties:
+        message_type:
+          $ref: '#/components/schemas/HubMessageType'
+        message_content:
+          $ref: '#/components/schemas/MessageContent'
+      type: object
+      required:
+      - message_type
+      - message_content
+      title: HubEvent
+    DroppedItem:
+      properties:
+        quantity:
+          type: integer
+          title: Quantity
+        product_detail_id:
+          type: integer
+          title: Product Detail Id
+      type: object
+      required:
+      - quantity
+      - product_detail_id
+      title: DroppedItem
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

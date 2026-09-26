@@ -1,0 +1,38 @@
+generated: '2026-09-26'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/autonomous-solutions-openapi.json
+skills:
+- file: skills/autonomous-solutions-create-and-check-order.md
+  name: autonomous-solutions-create-and-check-order
+  api: openapi/autonomous-solutions-openapi.json
+  operations:
+  - create_user_order_users__user_id__orders_post
+  - check_user_order_available_to_checkout_users__user_id__orders__order_id__checkout_available_get
+  - get_user_order_by_id_users__user_id__orders__order_id__get
+- file: skills/autonomous-solutions-pay-with-card.md
+  name: autonomous-solutions-pay-with-card
+  api: openapi/autonomous-solutions-openapi.json
+  operations:
+  - get_setup_intent_users_payments_setup_intent_post
+  - attach_payment_method_users_payments_save_payment_method_post
+  - pay_with_card_users_payments_pay_post
+  - confirm_payment_users_payments_confirm_payment_post
+- file: skills/autonomous-solutions-deposit-and-check-balance.md
+  name: autonomous-solutions-deposit-and-check-balance
+  api: openapi/autonomous-solutions-openapi.json
+  operations:
+  - create_wallet_deposit_users_wallet_deposit_post
+  - get_wallet_balance_users_wallet_balance_get
+- file: skills/autonomous-solutions-create-and-get-user.md
+  name: autonomous-solutions-create-and-get-user
+  api: openapi/autonomous-solutions-openapi.json
+  operations:
+  - create_user_users_user_post
+  - get_user_data_with_hub_users_user_get
+- file: skills/autonomous-solutions-create-and-retrieve-deal.md
+  name: autonomous-solutions-create-and-retrieve-deal
+  api: openapi/autonomous-solutions-openapi.json
+  operations:
+  - create_deal_deals__post
+  - get_deal_by_id_deals__deal_id__get

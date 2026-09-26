@@ -1,0 +1,37 @@
+generated: '2026-09-26'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://developer.venhub.com/docs/authentication.html
+sources:
+- https://developer.venhub.com/docs/authentication.html
+- https://developer.venhub.com/docs/index.html
+description: VenHub authentication methods
+schemes:
+- type: apiKey
+  name: API Key
+  evidence: 'All endpoints require authentication via one of two methods: a third-party API key or a Firebase user token.'
+  location: header
+  header: X-API-Key
+  scopes:
+  - inventory:read
+  - inventory:write
+  - orders:read
+  - orders:write
+  - analytics:read
+  - hubs:read
+  - hubs:write
+  - controls:read
+  - controls:write
+  - maintenance:read
+  - maintenance:write
+  - promotions:read
+  - promotions:write
+  how_to_obtain: API keys are generated in TINA, the VenHub dashboard — there is no endpoint for creating one programmatically.
+- type: http-bearer
+  name: Firebase
+  evidence: Firebase user authentication is used for requests made on behalf of a signed-in VenHub user.
+  location: header
+  header: Authorization
+  how_to_obtain: Obtain a Firebase ID token after authenticating a VenHub user via Firebase.
+note: No OAuth2 flows are documented for VenHub.
+docs: https://developer.venhub.com/docs/authentication.html

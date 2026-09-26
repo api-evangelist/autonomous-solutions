@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/autonomous-solutions/main/json-schema/autonomous-solutions-deal-retrieve-schema-schema.json",
+  "title": "DealRetrieveSchema",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/autonomous-solutions-openapi.json#/components/schemas/DealRetrieveSchema",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Description"
+    },
+    "display_text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Display Text"
+    },
+    "display_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Display Image"
+    },
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Start"
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "End"
+    },
+    "hub_id": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array",
+      "title": "Hub Id"
+    },
+    "is_deal_active": {
+      "type": "boolean",
+      "title": "Is Deal Active",
+      "default": true
+    },
+    "stackable": {
+      "type": "boolean",
+      "title": "Stackable",
+      "default": false
+    },
+    "priority": {
+      "type": "integer",
+      "title": "Priority",
+      "default": 0
+    },
+    "id": {
+      "type": "integer",
+      "title": "Id"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Modified At"
+    },
+    "rewards": {
+      "items": {
+        "$ref": "#/$defs/DealRewardRetrieveSchema"
+      },
+      "type": "array",
+      "title": "Rewards"
+    },
+    "triggers": {
+      "items": {
+        "$ref": "#/$defs/DealTriggerRetrieveSchema"
+      },
+      "type": "array",
+      "title": "Triggers",
+      "default": []
+    },
+    "constraints": {
+      "items": {
+        "$ref": "#/$defs/DealConstraintRetrieveSchema"
+      },
+      "type": "array",
+      "title": "Constraints",
+      "default": []
+    }
+  },
+  "type": "object",
+  "required": [
+    "name",
+    "start",
+    "end",
+    "hub_id",
+    "id",
+    "created_at",
+    "modified_at"
+  ],
+  "$defs": {
+    "ConstraintType": {
+      "type": "string",
+      "enum": [
+        "REDEMPTIONS",
+        "SALEAMT"
+      ],
+      "title": "ConstraintType",
+      "description": "Enumeration for deal constraint types"
+    },
+    "DealConstraintRetrieveSchema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "constraint_type": {
+          "$ref": "#/$defs/ConstraintType"
+        },
+        "redemption_limit": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Redemption Limit"
+        },
+        "period": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Period"
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id"
+        },
+        "category_id": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Category Id"
+        },
+        "subcategory_id": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subcategory Id"
+        },
+        "id": {
+          "type": "integer",
+          "title": "Id"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "constraint_type",
+        "id"
+      ],
+      "title": "DealConstraintRetrieveSchema"
+    },
+    "DealRewardRetrieveSchema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "reward_type": {
+          "$ref": "#/$defs/RewardType"
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id"
+        },
+        "category_id": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Category Id"
+        },
+        "subcategory_id": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subcategory Id"
+        },
+        "discount_pct_or_price": {
+          "type": "integer",
+          "title": "Discount Pct Or Price"
+        },
+        "id": {
+          "type": "integer",
+          "title": "Id"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "reward_type",
+        "discount_pct_or_price",
+        "id"
+      ],
+      "title": "DealRewardRetrieveSchema"
+    },
+    "DealTriggerRetrieveSchema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name"
+        },
+        "trigger_type": {
+          "$ref": "#/$defs/TriggerType"
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Id"
+        },
+        "category_id": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Category Id"
+        },
+        "subcategory_id": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subcategory Id"
+        },
+        "nth_order": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Nth Order"
+        },
+        "min_val_trigger": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Min Val Trigger"
+        },
+        "time_window_start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Time Window Start"
+        },
+        "time_window_end": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Time Window End"
+        },
+        "days_of_the_week": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Days Of The Week"
+        },
+        "id": {
+          "type": "integer",
+          "title": "Id"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "trigger_type",
+        "id"
+      ],
+      "title": "DealTriggerRetrieveSchema"
+    },
+    "RewardType": {
+      "type": "string",
+      "enum": [
+        "ITEMVAL",
+        "ITEMDISC",
+        "MULTVAL",
+        "MULTDISC",
+        "CARTVAL",
+        "CARTDISC"
+      ],
+      "title": "RewardType",
+      "description": "Enumeration for deal reward types"
+    },
+    "TriggerType": {
+      "type": "string",
+      "enum": [
+        "CARTVAL",
+        "CONTAINSCAT",
+        "CONTAINSITEM",
+        "FIRSTORDER",
+        "NTHORDER",
+        "BDAY",
+        "REFERRAL",
+        "TIME"
+      ],
+      "title": "TriggerType",
+      "description": "Enumeration for deal trigger types"
+    }
+  }
+}

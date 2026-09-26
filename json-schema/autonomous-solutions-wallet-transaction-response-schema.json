@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/autonomous-solutions/main/json-schema/autonomous-solutions-wallet-transaction-response-schema.json",
+  "title": "WalletTransactionResponse",
+  "description": "Schema for wallet transaction response. Amounts are in dollars.",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/autonomous-solutions-openapi.json#/components/schemas/WalletTransactionResponse",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "title": "Id"
+    },
+    "user_id": {
+      "type": "integer",
+      "title": "User Id"
+    },
+    "amount": {
+      "type": "string",
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Amount"
+    },
+    "transaction_type": {
+      "type": "string",
+      "enum": [
+        "DEPOSIT",
+        "PURCHASE",
+        "REFUND",
+        "ADJUSTMENT",
+        "BONUS"
+      ],
+      "title": "Transaction Type"
+    },
+    "balance_after": {
+      "type": "string",
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Balance After"
+    },
+    "stripe_payment_intent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Stripe Payment Intent Id"
+    },
+    "order_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Order Id"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Description"
+    },
+    "transaction_metadata": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Transaction Metadata"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "created_by": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Created By"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "title": "Idempotency Key"
+    }
+  },
+  "type": "object",
+  "required": [
+    "id",
+    "user_id",
+    "amount",
+    "transaction_type",
+    "balance_after",
+    "created_at",
+    "idempotency_key"
+  ]
+}
