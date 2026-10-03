@@ -106,15 +106,15 @@ paths:
               schema: {}
 components:
   schemas:
-    UpdateNotificationReadStatusSchema:
+    HTTPValidationError:
       properties:
-        is_read:
-          type: boolean
-          title: Is Read
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - is_read
-      title: UpdateNotificationReadStatusSchema
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -141,12 +141,12 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    UpdateNotificationReadStatusSchema:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        is_read:
+          type: boolean
+          title: Is Read
       type: object
-      title: HTTPValidationError
+      required:
+      - is_read
+      title: UpdateNotificationReadStatusSchema

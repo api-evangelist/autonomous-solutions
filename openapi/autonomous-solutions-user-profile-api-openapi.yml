@@ -173,44 +173,16 @@ components:
           title: Is Migrated
       type: object
       title: UserProfileUpdate
-    UserProfileMeResponse:
+    Body_update_user_profile_image_users_user_profile_image_patch:
       properties:
-        id:
-          type: integer
-          title: Id
-        firebase_user_id:
+        files:
           type: string
-          title: Firebase User Id
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        email:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        profile_complete:
-          type: boolean
-          title: Profile Complete
+          contentMediaType: application/octet-stream
+          title: Files
       type: object
       required:
-      - id
-      - firebase_user_id
-      - profile_complete
-      title: UserProfileMeResponse
-      description: Response for PATCH /user/me/profile — null-safe during progressive signup.
+      - files
+      title: Body_update_user_profile_image_users_user_profile_image_patch
     UserProfileRetrieve:
       properties:
         firebase_user_id:
@@ -325,25 +297,6 @@ components:
       - created_at
       - updated_at
       title: UserProfileRetrieve
-    Body_update_user_profile_image_users_user_profile_image_patch:
-      properties:
-        files:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Files
-      type: object
-      required:
-      - files
-      title: Body_update_user_profile_image_users_user_profile_image_patch
-    UserProfileImage:
-      properties:
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: UserProfileImage
     UserProfilePatch:
       properties:
         first_name:
@@ -371,32 +324,44 @@ components:
       - last_name
       title: UserProfilePatch
       description: Body for PATCH /users/me/profile — supplies fields currently null on the user row.
-    ValidationError:
+    UserProfileMeResponse:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        id:
+          type: integer
+          title: Id
+        firebase_user_id:
           type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Firebase User Id
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        profile_complete:
+          type: boolean
+          title: Profile Complete
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - id
+      - firebase_user_id
+      - profile_complete
+      title: UserProfileMeResponse
+      description: Response for PATCH /user/me/profile — null-safe during progressive signup.
     HTTPValidationError:
       properties:
         detail:
@@ -423,3 +388,38 @@ components:
       required:
       - coordinates
       title: GeoJsonLocation
+    UserProfileImage:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: UserProfileImage
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

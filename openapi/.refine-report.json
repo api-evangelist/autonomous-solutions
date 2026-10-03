@@ -1,7 +1,7 @@
 {
   "provider": "autonomous-solutions",
   "sources": [
-    "autonomous-solutions-openapi.json"
+    "_original/autonomous-solutions-openapi.json"
   ],
   "outputs": [
     "autonomous-solutions-hls-api-openapi.yml",
@@ -31,11 +31,12 @@
     "autonomous-solutions-zendesk-webhook-api-openapi.yml"
   ],
   "archived": [
-    "archived openapi/autonomous-solutions-openapi.json"
+    "deleted 1 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "autonomous-solutions-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "autonomous-solutions-openapi.json: declared missing tag: HLS",
     "autonomous-solutions-openapi.json: declared missing tag: banners",
@@ -62,7 +63,34 @@
     "autonomous-solutions-openapi.json: declared missing tag: vensmart",
     "autonomous-solutions-openapi.json: declared missing tag: zendesk",
     "autonomous-solutions-openapi.json: declared missing tag: zendesk-webhook",
-    "apis.yml register: written (+25 apis, 25 total)"
+    "superseded outputs removed: autonomous-solutions-health-check-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 25 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "autonomous-solutions-banners-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-bg-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-deals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-diagnostics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-guest-checkout-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-health-check-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-hls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-hubs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-loyalty-points-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-root-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-selected-hub-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-user-favorites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-user-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-user-payment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-user-profile-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-user-wallet-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-vensmart-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-zendesk-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autonomous-solutions-zendesk-webhook-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

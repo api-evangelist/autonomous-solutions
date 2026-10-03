@@ -152,14 +152,6 @@ components:
       - max_cart_items
       - hub_status
       title: HubUserCurrentResponse
-    HubStatus:
-      type: string
-      enum:
-      - active
-      - maintenance
-      - restocking
-      - hidden
-      title: HubStatus
     HubDefaultRequest:
       properties:
         geojson_location:
@@ -168,32 +160,14 @@ components:
           - type: 'null'
       type: object
       title: HubDefaultRequest
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+    HubStatus:
+      type: string
+      enum:
+      - active
+      - maintenance
+      - restocking
+      - hidden
+      title: HubStatus
     HTTPValidationError:
       properties:
         detail:
@@ -220,3 +194,29 @@ components:
       required:
       - coordinates
       title: GeoJsonLocation
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

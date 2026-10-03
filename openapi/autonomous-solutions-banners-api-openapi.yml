@@ -93,6 +93,33 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_create_hub_banner_hubs_owner_banners_post:
+      properties:
+        name:
+          type: string
+          title: Name
+        order_by:
+          type: integer
+          title: Order By
+        file:
+          type: string
+          contentMediaType: application/octet-stream
+          title: File
+      type: object
+      required:
+      - name
+      - order_by
+      - file
+      title: Body_create_hub_banner_hubs_owner_banners_post
     ValidationError:
       properties:
         loc:
@@ -119,30 +146,3 @@ components:
       - msg
       - type
       title: ValidationError
-    Body_create_hub_banner_hubs_owner_banners_post:
-      properties:
-        name:
-          type: string
-          title: Name
-        order_by:
-          type: integer
-          title: Order By
-        file:
-          type: string
-          contentMediaType: application/octet-stream
-          title: File
-      type: object
-      required:
-      - name
-      - order_by
-      - file
-      title: Body_create_hub_banner_hubs_owner_banners_post
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

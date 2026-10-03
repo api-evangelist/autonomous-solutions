@@ -31,6 +31,33 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HubMessageType:
+      type: string
+      enum:
+      - info
+      - warning
+      - error
+      - update
+      - heartbeat
+      - notification
+      - order_completed
+      - order_update
+      - order_started
+      - door_opened
+      title: HubMessageType
+    DroppedItem:
+      properties:
+        quantity:
+          type: integer
+          title: Quantity
+        product_detail_id:
+          type: integer
+          title: Product Detail Id
+      type: object
+      required:
+      - quantity
+      - product_detail_id
+      title: DroppedItem
     MessageContent:
       properties:
         user_id:
@@ -89,20 +116,26 @@ components:
           title: Hub Response Status Code
       type: object
       title: MessageContent
-    HubMessageType:
-      type: string
-      enum:
-      - info
-      - warning
-      - error
-      - update
-      - heartbeat
-      - notification
-      - order_completed
-      - order_update
-      - order_started
-      - door_opened
-      title: HubMessageType
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HubEvent:
+      properties:
+        message_type:
+          $ref: '#/components/schemas/HubMessageType'
+        message_content:
+          $ref: '#/components/schemas/MessageContent'
+      type: object
+      required:
+      - message_type
+      - message_content
+      title: HubEvent
     BinStatus:
       properties:
         bin_num:
@@ -130,30 +163,6 @@ components:
       - status_code
       title: BinStatus
       description: "Status information for an individual bin.\n\nAttributes:\n    bin_num: The bin number\n    occurrence: The occurrence count for this bin (for handling multiple bins with the same number)\n    status_code: VensmartStatusCode indicating the bin's current state\n    is_ready: Whether the bin is ready to be opened\n    is_dropped: Whether all items in this bin were dropped"
-    HubEvent:
-      properties:
-        message_type:
-          $ref: '#/components/schemas/HubMessageType'
-        message_content:
-          $ref: '#/components/schemas/MessageContent'
-      type: object
-      required:
-      - message_type
-      - message_content
-      title: HubEvent
-    DroppedItem:
-      properties:
-        quantity:
-          type: integer
-          title: Quantity
-        product_detail_id:
-          type: integer
-          title: Product Detail Id
-      type: object
-      required:
-      - quantity
-      - product_detail_id
-      title: DroppedItem
     ValidationError:
       properties:
         loc:
@@ -180,12 +189,3 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

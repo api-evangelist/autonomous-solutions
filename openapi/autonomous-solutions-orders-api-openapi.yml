@@ -405,6 +405,20 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    UpdateOrderItemSchema:
+      properties:
+        product_id:
+          type: integer
+          title: Product Id
+        quantity:
+          type: integer
+          minimum: 0.0
+          title: Quantity
+      type: object
+      required:
+      - product_id
+      - quantity
+      title: UpdateOrderItemSchema
     OrderOrderingField:
       type: string
       enum:
@@ -429,20 +443,15 @@ components:
       description: 'Enumeration of the various stages an Order can be in,
 
         from creation through payment and fulfillment.'
-    UpdateOrderItemSchema:
+    HTTPValidationError:
       properties:
-        product_id:
-          type: integer
-          title: Product Id
-        quantity:
-          type: integer
-          minimum: 0.0
-          title: Quantity
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - product_id
-      - quantity
-      title: UpdateOrderItemSchema
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -469,12 +478,3 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

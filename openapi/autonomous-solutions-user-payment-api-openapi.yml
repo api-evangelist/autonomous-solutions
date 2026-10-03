@@ -177,6 +177,44 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ApplePayRequestSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      title: ApplePayRequestSchema
+    GooglePayRequestSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      title: GooglePayRequestSchema
     CardPaymentRequestSchema:
       properties:
         payment_method_id:
@@ -207,34 +245,15 @@ components:
       - payment_method_id
       - order_id
       title: CardPaymentRequestSchema
-    PaymentMethodAttachRequestSchema:
+    HTTPValidationError:
       properties:
-        payment_method_id:
-          type: string
-          title: Payment Method Id
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - payment_method_id
-      title: PaymentMethodAttachRequestSchema
-    GooglePayRequestSchema:
-      properties:
-        order_id:
-          type: integer
-          title: Order Id
-        deal_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Deal Id
-        venbucks_to_redeem:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Venbucks To Redeem
-      type: object
-      required:
-      - order_id
-      title: GooglePayRequestSchema
+      title: HTTPValidationError
     ConfirmPaymentSchema:
       properties:
         success:
@@ -262,25 +281,24 @@ components:
       - payment_intent_id
       - order_id
       title: ConfirmPaymentSchema
-    ApplePayRequestSchema:
+    PaymentMethodAttachRequestSchema:
       properties:
-        order_id:
-          type: integer
-          title: Order Id
-        deal_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Deal Id
-        venbucks_to_redeem:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Venbucks To Redeem
+        payment_method_id:
+          type: string
+          title: Payment Method Id
       type: object
       required:
-      - order_id
-      title: ApplePayRequestSchema
+      - payment_method_id
+      title: PaymentMethodAttachRequestSchema
+    ClientSecretSchema:
+      properties:
+        client_secret:
+          type: string
+          title: Client Secret
+      type: object
+      required:
+      - client_secret
+      title: ClientSecretSchema
     ValidationError:
       properties:
         loc:
@@ -307,21 +325,3 @@ components:
       - msg
       - type
       title: ValidationError
-    ClientSecretSchema:
-      properties:
-        client_secret:
-          type: string
-          title: Client Secret
-      type: object
-      required:
-      - client_secret
-      title: ClientSecretSchema
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

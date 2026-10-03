@@ -73,22 +73,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    LoyaltyPointsBalanceSchema:
+    HTTPValidationError:
       properties:
-        loyalty_points:
-          type: integer
-          title: Loyalty Points
-          description: Current VenBucks balance
-        points_value_in_cents:
-          type: integer
-          title: Points Value In Cents
-          description: Monetary value of points in cents
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - loyalty_points
-      - points_value_in_cents
-      title: LoyaltyPointsBalanceSchema
-      description: Schema for user's loyalty points balance
+      title: HTTPValidationError
     LoyaltyPointsCalculationSchema:
       properties:
         order_total:
@@ -146,12 +139,19 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    LoyaltyPointsBalanceSchema:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        loyalty_points:
+          type: integer
+          title: Loyalty Points
+          description: Current VenBucks balance
+        points_value_in_cents:
+          type: integer
+          title: Points Value In Cents
+          description: Monetary value of points in cents
       type: object
-      title: HTTPValidationError
+      required:
+      - loyalty_points
+      - points_value_in_cents
+      title: LoyaltyPointsBalanceSchema
+      description: Schema for user's loyalty points balance

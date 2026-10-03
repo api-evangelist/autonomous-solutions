@@ -117,46 +117,41 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    WalletDebitRequest:
+    WalletDepositResponse:
       properties:
-        order_id:
-          type: integer
-          title: Order Id
-        amount:
-          anyOf:
-          - type: number
-            exclusiveMinimum: 0.0
-          - type: string
-            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d{0,2}0*$
-          title: Amount
-          description: Amount to debit from wallet (original amount, deals will be calculated server-side)
-        description:
+        client_secret:
           type: string
-          title: Description
-        deal_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Deal Id
-        deal_ids:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Deal Ids
-        venbucks_to_redeem:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Venbucks To Redeem
+          title: Client Secret
+        payment_intent_id:
+          type: string
+          title: Payment Intent Id
       type: object
       required:
-      - order_id
-      - amount
-      - description
-      title: WalletDebitRequest
-      description: Schema for wallet payment request - debits wallet and sends order to VenSmart
+      - client_secret
+      - payment_intent_id
+      title: WalletDepositResponse
+      description: Schema for deposit response
+    WalletBalanceResponse:
+      properties:
+        user_id:
+          type: integer
+          title: User Id
+        balance:
+          type: string
+          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          title: Balance
+        last_transaction_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Transaction At
+      type: object
+      required:
+      - user_id
+      - balance
+      title: WalletBalanceResponse
+      description: Schema for wallet balance response
     WalletTransactionResponse:
       properties:
         id:
@@ -227,27 +222,75 @@ components:
       - idempotency_key
       title: WalletTransactionResponse
       description: Schema for wallet transaction response. Amounts are in dollars.
-    WalletBalanceResponse:
+    WalletDebitRequest:
       properties:
-        user_id:
+        order_id:
           type: integer
-          title: User Id
-        balance:
-          type: string
-          pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          title: Balance
-        last_transaction_at:
+          title: Order Id
+        amount:
           anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
           - type: string
-            format: date-time
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d{0,2}0*$
+          title: Amount
+          description: Amount to debit from wallet (original amount, deals will be calculated server-side)
+        description:
+          type: string
+          title: Description
+        deal_id:
+          anyOf:
+          - type: integer
           - type: 'null'
-          title: Last Transaction At
+          title: Deal Id
+        deal_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Deal Ids
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
       type: object
       required:
-      - user_id
-      - balance
-      title: WalletBalanceResponse
-      description: Schema for wallet balance response
+      - order_id
+      - amount
+      - description
+      title: WalletDebitRequest
+      description: Schema for wallet payment request - debits wallet and sends order to VenSmart
+    WalletDepositRequest:
+      properties:
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d{0,2}0*$
+          title: Amount
+          description: Amount to deposit in dollars
+        payment_method_id:
+          type: string
+          title: Payment Method Id
+          description: Stripe payment method ID
+      type: object
+      required:
+      - amount
+      - payment_method_id
+      title: WalletDepositRequest
+      description: Schema for deposit request
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -274,46 +317,3 @@ components:
       - msg
       - type
       title: ValidationError
-    WalletDepositResponse:
-      properties:
-        client_secret:
-          type: string
-          title: Client Secret
-        payment_intent_id:
-          type: string
-          title: Payment Intent Id
-      type: object
-      required:
-      - client_secret
-      - payment_intent_id
-      title: WalletDepositResponse
-      description: Schema for deposit response
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    WalletDepositRequest:
-      properties:
-        amount:
-          anyOf:
-          - type: number
-            exclusiveMinimum: 0.0
-          - type: string
-            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d{0,2}0*$
-          title: Amount
-          description: Amount to deposit in dollars
-        payment_method_id:
-          type: string
-          title: Payment Method Id
-          description: Stripe payment method ID
-      type: object
-      required:
-      - amount
-      - payment_method_id
-      title: WalletDepositRequest
-      description: Schema for deposit request

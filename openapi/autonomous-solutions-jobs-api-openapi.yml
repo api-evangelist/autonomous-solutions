@@ -85,50 +85,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    JobStatusResponse:
+    HTTPValidationError:
       properties:
-        id:
-          type: integer
-          title: Id
-        job_id:
-          type: string
-          format: uuid
-          title: Job Id
-        name:
-          type: string
-          title: Name
-        args:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Args
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        status:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Status
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - job_id
-      - name
-      - created_at
-      title: JobStatusResponse
+      title: HTTPValidationError
     JobStatusFindRequest:
       properties:
         id:
@@ -190,12 +155,47 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    JobStatusResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        id:
+          type: integer
+          title: Id
+        job_id:
+          type: string
+          format: uuid
+          title: Job Id
+        name:
+          type: string
+          title: Name
+        args:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Args
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        status:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Status
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
       type: object
-      title: HTTPValidationError
+      required:
+      - id
+      - job_id
+      - name
+      - created_at
+      title: JobStatusResponse

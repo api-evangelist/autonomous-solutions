@@ -114,115 +114,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    SimilarProductSchema:
-      properties:
-        name:
-          type: string
-          title: Name
-        image_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image Url
-        upc:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Upc
-        original_price:
-          type: integer
-          title: Original Price
-        discounted_price:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Discounted Price
-        quantity_in_stock:
-          type: integer
-          title: Quantity In Stock
-        max_per_order:
-          type: integer
-          title: Max Per Order
-        subcategory_id:
-          type: integer
-          title: Subcategory Id
-        category_id:
-          type: integer
-          title: Category Id
-        hub_id:
-          type: integer
-          title: Hub Id
-        is_favorite:
-          type: boolean
-          title: Is Favorite
-        id:
-          type: integer
-          title: Id
-        subcategory:
-          type: string
-          title: Subcategory
-        category:
-          type: string
-          title: Category
-      type: object
-      required:
-      - name
-      - image_url
-      - upc
-      - original_price
-      - quantity_in_stock
-      - max_per_order
-      - subcategory_id
-      - category_id
-      - hub_id
-      - is_favorite
-      - id
-      - subcategory
-      - category
-      title: SimilarProductSchema
-    ProductTaxType:
-      type: string
-      enum:
-      - sales_tax
-      - bottle_tax
-      - no_tax
-      - unknown_tax
-      title: ProductTaxType
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ProductRetrieveSchema:
       properties:
         name:
@@ -330,3 +221,112 @@ components:
       - quantity_in_basket
       - tax_type
       title: ProductRetrieveSchema
+    ProductTaxType:
+      type: string
+      enum:
+      - sales_tax
+      - bottle_tax
+      - no_tax
+      - unknown_tax
+      title: ProductTaxType
+    SimilarProductSchema:
+      properties:
+        name:
+          type: string
+          title: Name
+        image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Url
+        upc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Upc
+        original_price:
+          type: integer
+          title: Original Price
+        discounted_price:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Discounted Price
+        quantity_in_stock:
+          type: integer
+          title: Quantity In Stock
+        max_per_order:
+          type: integer
+          title: Max Per Order
+        subcategory_id:
+          type: integer
+          title: Subcategory Id
+        category_id:
+          type: integer
+          title: Category Id
+        hub_id:
+          type: integer
+          title: Hub Id
+        is_favorite:
+          type: boolean
+          title: Is Favorite
+        id:
+          type: integer
+          title: Id
+        subcategory:
+          type: string
+          title: Subcategory
+        category:
+          type: string
+          title: Category
+      type: object
+      required:
+      - name
+      - image_url
+      - upc
+      - original_price
+      - quantity_in_stock
+      - max_per_order
+      - subcategory_id
+      - category_id
+      - hub_id
+      - is_favorite
+      - id
+      - subcategory
+      - category
+      title: SimilarProductSchema
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

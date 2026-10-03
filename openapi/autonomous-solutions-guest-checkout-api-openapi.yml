@@ -375,46 +375,12 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    GuestSessionCreateSchema:
-      properties:
-        hub_id:
-          type: integer
-          title: Hub Id
-        fcm_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Fcm Token
-        device_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Device Id
-        device_type:
-          anyOf:
-          - $ref: '#/components/schemas/DeviceTypeEnum'
-          - type: 'null'
-      type: object
-      required:
-      - hub_id
-      title: GuestSessionCreateSchema
-    GuestSessionResponseSchema:
-      properties:
-        guest_token:
-          type: string
-          title: Guest Token
-        guest_user_id:
-          type: integer
-          title: Guest User Id
-        order_id:
-          type: integer
-          title: Order Id
-      type: object
-      required:
-      - guest_token
-      - guest_user_id
-      - order_id
-      title: GuestSessionResponseSchema
+    DeviceTypeEnum:
+      type: string
+      enum:
+      - ios
+      - android
+      title: DeviceTypeEnum
     GuestClaimOrderSchema:
       properties:
         guest_token:
@@ -428,83 +394,6 @@ components:
       - guest_token
       - order_id
       title: GuestClaimOrderSchema
-    GooglePayRequestSchema:
-      properties:
-        order_id:
-          type: integer
-          title: Order Id
-        deal_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Deal Id
-        venbucks_to_redeem:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Venbucks To Redeem
-      type: object
-      required:
-      - order_id
-      title: GooglePayRequestSchema
-    ConfirmPaymentSchema:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        payment_intent_id:
-          type: string
-          title: Payment Intent Id
-        order_id:
-          type: integer
-          title: Order Id
-        deal_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Deal Id
-        venbucks_to_redeem:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Venbucks To Redeem
-      type: object
-      required:
-      - success
-      - payment_intent_id
-      - order_id
-      title: ConfirmPaymentSchema
-    UserFCMConfigCreateSchema:
-      properties:
-        fcm_token:
-          type: string
-          title: Fcm Token
-        device_id:
-          type: string
-          title: Device Id
-        device_type:
-          $ref: '#/components/schemas/DeviceTypeEnum'
-      type: object
-      required:
-      - fcm_token
-      - device_id
-      - device_type
-      title: UserFCMConfigCreateSchema
-    GuestClaimOrderResponseSchema:
-      properties:
-        order_id:
-          type: integer
-          title: Order Id
-      type: object
-      required:
-      - order_id
-      title: GuestClaimOrderResponseSchema
-    DeviceTypeEnum:
-      type: string
-      enum:
-      - ios
-      - android
-      title: DeviceTypeEnum
     ApplePayRequestSchema:
       properties:
         order_id:
@@ -524,6 +413,34 @@ components:
       required:
       - order_id
       title: ApplePayRequestSchema
+    GuestClaimOrderResponseSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+      type: object
+      required:
+      - order_id
+      title: GuestClaimOrderResponseSchema
+    GooglePayRequestSchema:
+      properties:
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - order_id
+      title: GooglePayRequestSchema
     GuestContactSchema:
       properties:
         email:
@@ -567,6 +484,98 @@ components:
       - order_id
       - stripe_payment_method_id
       title: GuestCardPaymentSchema
+    ConfirmPaymentSchema:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        payment_intent_id:
+          type: string
+          title: Payment Intent Id
+        order_id:
+          type: integer
+          title: Order Id
+        deal_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Deal Id
+        venbucks_to_redeem:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Venbucks To Redeem
+      type: object
+      required:
+      - success
+      - payment_intent_id
+      - order_id
+      title: ConfirmPaymentSchema
+    GuestSessionCreateSchema:
+      properties:
+        hub_id:
+          type: integer
+          title: Hub Id
+        fcm_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fcm Token
+        device_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Id
+        device_type:
+          anyOf:
+          - $ref: '#/components/schemas/DeviceTypeEnum'
+          - type: 'null'
+      type: object
+      required:
+      - hub_id
+      title: GuestSessionCreateSchema
+    GuestSessionResponseSchema:
+      properties:
+        guest_token:
+          type: string
+          title: Guest Token
+        guest_user_id:
+          type: integer
+          title: Guest User Id
+        order_id:
+          type: integer
+          title: Order Id
+      type: object
+      required:
+      - guest_token
+      - guest_user_id
+      - order_id
+      title: GuestSessionResponseSchema
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UserFCMConfigCreateSchema:
+      properties:
+        fcm_token:
+          type: string
+          title: Fcm Token
+        device_id:
+          type: string
+          title: Device Id
+        device_type:
+          $ref: '#/components/schemas/DeviceTypeEnum'
+      type: object
+      required:
+      - fcm_token
+      - device_id
+      - device_type
+      title: UserFCMConfigCreateSchema
     ValidationError:
       properties:
         loc:
@@ -593,12 +602,3 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

@@ -365,6 +365,171 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    CheckEligibilityResponseSchema:
+      properties:
+        eligible_deals:
+          items:
+            $ref: '#/components/schemas/EligibleDealSchema'
+          type: array
+          title: Eligible Deals
+      type: object
+      required:
+      - eligible_deals
+      title: CheckEligibilityResponseSchema
+      description: Response schema for eligibility check
+    DealRedemptionStatusSchema:
+      properties:
+        deal_id:
+          type: integer
+          title: Deal Id
+        deal_name:
+          type: string
+          title: Deal Name
+        total_redemptions:
+          type: integer
+          title: Total Redemptions
+        redemption_limit:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Redemption Limit
+        limit_reached:
+          type: boolean
+          title: Limit Reached
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - deal_id
+      - deal_name
+      - total_redemptions
+      - limit_reached
+      - is_active
+      title: DealRedemptionStatusSchema
+      description: Schema for deal redemption status (owners app)
+    ConstraintType:
+      type: string
+      enum:
+      - REDEMPTIONS
+      - SALEAMT
+      title: ConstraintType
+      description: Enumeration for deal constraint types
+    DealConstraintRetrieveSchema:
+      properties:
+        name:
+          type: string
+          title: Name
+        constraint_type:
+          $ref: '#/components/schemas/ConstraintType'
+        redemption_limit:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Redemption Limit
+        period:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Period
+        product_id:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Product Id
+        category_id:
+          anyOf:
+          - items:
+              anyOf:
+              - type: integer
+              - type: string
+            type: array
+          - type: 'null'
+          title: Category Id
+        subcategory_id:
+          anyOf:
+          - items:
+              anyOf:
+              - type: integer
+              - type: string
+            type: array
+          - type: 'null'
+          title: Subcategory Id
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - name
+      - constraint_type
+      - id
+      title: DealConstraintRetrieveSchema
+    DealTriggerBaseSchema:
+      properties:
+        name:
+          type: string
+          title: Name
+        trigger_type:
+          $ref: '#/components/schemas/TriggerType'
+        product_id:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Product Id
+        category_id:
+          anyOf:
+          - items:
+              anyOf:
+              - type: integer
+              - type: string
+            type: array
+          - type: 'null'
+          title: Category Id
+        subcategory_id:
+          anyOf:
+          - items:
+              anyOf:
+              - type: integer
+              - type: string
+            type: array
+          - type: 'null'
+          title: Subcategory Id
+        nth_order:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Nth Order
+        min_val_trigger:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Min Val Trigger
+        time_window_start:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time Window Start
+        time_window_end:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time Window End
+        days_of_the_week:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Days Of The Week
+      type: object
+      required:
+      - name
+      - trigger_type
+      title: DealTriggerBaseSchema
     EligibleDealSchema:
       properties:
         deal_id:
@@ -411,7 +576,7 @@ components:
       - stackable
       title: EligibleDealSchema
       description: Schema for deals that the cart is eligible for
-    ModifiedCartItemSchema:
+    CartItemSchema:
       properties:
         product_id:
           type: integer
@@ -429,35 +594,16 @@ components:
         quantity:
           type: integer
           title: Quantity
-        original_unit_price:
+        unit_price:
           type: integer
-          title: Original Unit Price
-        discounted_unit_price:
-          type: integer
-          title: Discounted Unit Price
-        discount_applied:
-          type: boolean
-          title: Discount Applied
-          default: false
-        quantity_discounted:
-          type: integer
-          title: Quantity Discounted
-          default: 0
+          title: Unit Price
       type: object
       required:
       - product_id
       - quantity
-      - original_unit_price
-      - discounted_unit_price
-      title: ModifiedCartItemSchema
-      description: Schema for cart items with applied discounts
-    ConstraintType:
-      type: string
-      enum:
-      - REDEMPTIONS
-      - SALEAMT
-      title: ConstraintType
-      description: Enumeration for deal constraint types
+      - unit_price
+      title: CartItemSchema
+      description: Schema for cart items when checking eligibility
     DealTriggerRetrieveSchema:
       properties:
         name:
@@ -526,232 +672,6 @@ components:
       - trigger_type
       - id
       title: DealTriggerRetrieveSchema
-    DealRewardBaseSchema:
-      properties:
-        name:
-          type: string
-          title: Name
-        reward_type:
-          $ref: '#/components/schemas/RewardType'
-        product_id:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Product Id
-        category_id:
-          anyOf:
-          - items:
-              anyOf:
-              - type: integer
-              - type: string
-            type: array
-          - type: 'null'
-          title: Category Id
-        subcategory_id:
-          anyOf:
-          - items:
-              anyOf:
-              - type: integer
-              - type: string
-            type: array
-          - type: 'null'
-          title: Subcategory Id
-        discount_pct_or_price:
-          type: integer
-          title: Discount Pct Or Price
-      type: object
-      required:
-      - name
-      - reward_type
-      - discount_pct_or_price
-      title: DealRewardBaseSchema
-    CheckEligibilityRequestSchema:
-      properties:
-        hub_id:
-          type: integer
-          title: Hub Id
-        user_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Id
-        cart_items:
-          items:
-            $ref: '#/components/schemas/CartItemSchema'
-          type: array
-          title: Cart Items
-        cart_total:
-          type: integer
-          title: Cart Total
-        user_order_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Order Count
-        device_uuid:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Device Uuid
-      type: object
-      required:
-      - hub_id
-      - cart_items
-      - cart_total
-      title: CheckEligibilityRequestSchema
-      description: Schema for checking if cart meets deal trigger conditions
-    CheckEligibilityResponseSchema:
-      properties:
-        eligible_deals:
-          items:
-            $ref: '#/components/schemas/EligibleDealSchema'
-          type: array
-          title: Eligible Deals
-      type: object
-      required:
-      - eligible_deals
-      title: CheckEligibilityResponseSchema
-      description: Response schema for eligibility check
-    RewardType:
-      type: string
-      enum:
-      - ITEMVAL
-      - ITEMDISC
-      - MULTVAL
-      - MULTDISC
-      - CARTVAL
-      - CARTDISC
-      title: RewardType
-      description: Enumeration for deal reward types
-    ActiveDealDisplaySchema:
-      properties:
-        id:
-          type: integer
-          title: Id
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        display_text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Text
-        display_image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Image
-        priority:
-          type: integer
-          title: Priority
-      type: object
-      required:
-      - id
-      - name
-      - priority
-      title: ActiveDealDisplaySchema
-      description: Schema for displaying active deals in the banner
-    ApplyRewardResponseSchema:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        deal_applied:
-          type: string
-          title: Deal Applied
-        modified_cart_items:
-          items:
-            $ref: '#/components/schemas/ModifiedCartItemSchema'
-          type: array
-          title: Modified Cart Items
-        original_cart_total:
-          type: integer
-          title: Original Cart Total
-        discounted_cart_total:
-          type: integer
-          title: Discounted Cart Total
-        total_savings:
-          type: integer
-          title: Total Savings
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - success
-      - deal_applied
-      - modified_cart_items
-      - original_cart_total
-      - discounted_cart_total
-      - total_savings
-      - message
-      title: ApplyRewardResponseSchema
-      description: Response schema for applying rewards
-    DealUpdateSchema:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        display_text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Text
-        display_image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Image
-        start:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Start
-        end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End
-        hub_id:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Hub Id
-        is_deal_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Deal Active
-        stackable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Stackable
-        priority:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Priority
-      type: object
-      title: DealUpdateSchema
     DealRewardRetrieveSchema:
       properties:
         name:
@@ -797,70 +717,80 @@ components:
       - discount_pct_or_price
       - id
       title: DealRewardRetrieveSchema
-    DealRedemptionStatusSchema:
+    Body_create_deal_from_owner_deals_create_from_owner_post:
       properties:
-        deal_id:
-          type: integer
-          title: Deal Id
-        deal_name:
+        dealData:
           type: string
-          title: Deal Name
-        total_redemptions:
-          type: integer
-          title: Total Redemptions
-        redemption_limit:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Redemption Limit
-        limit_reached:
-          type: boolean
-          title: Limit Reached
-        is_active:
-          type: boolean
-          title: Is Active
+          title: Dealdata
+        file:
+          type: string
+          contentMediaType: application/octet-stream
+          title: File
       type: object
       required:
-      - deal_id
-      - deal_name
-      - total_redemptions
-      - limit_reached
-      - is_active
-      title: DealRedemptionStatusSchema
-      description: Schema for deal redemption status (owners app)
-    ApplyRewardRequestSchema:
+      - dealData
+      - file
+      title: Body_create_deal_from_owner_deals_create_from_owner_post
+    ValidationError:
       properties:
-        deal_ids:
+        loc:
           items:
-            type: integer
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Deal Ids
-        hub_id:
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ActiveDealDisplaySchema:
+      properties:
+        id:
           type: integer
-          title: Hub Id
-        user_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: User Id
-        cart_items:
-          items:
-            $ref: '#/components/schemas/CartItemSchema'
-          type: array
-          title: Cart Items
-        device_uuid:
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
           anyOf:
           - type: string
           - type: 'null'
-          title: Device Uuid
+          title: Description
+        display_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Text
+        display_image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Image
+        priority:
+          type: integer
+          title: Priority
       type: object
       required:
-      - deal_ids
-      - hub_id
-      - cart_items
-      title: ApplyRewardRequestSchema
-      description: Schema for applying a reward to the cart
-    DealConstraintRetrieveSchema:
+      - id
+      - name
+      - priority
+      title: ActiveDealDisplaySchema
+      description: Schema for displaying active deals in the banner
+    DealConstraintBaseSchema:
       properties:
         name:
           type: string
@@ -902,41 +832,78 @@ components:
             type: array
           - type: 'null'
           title: Subcategory Id
-        id:
-          type: integer
-          title: Id
       type: object
       required:
       - name
       - constraint_type
-      - id
-      title: DealConstraintRetrieveSchema
-    ValidationError:
+      title: DealConstraintBaseSchema
+    CheckEligibilityRequestSchema:
       properties:
-        loc:
+        hub_id:
+          type: integer
+          title: Hub Id
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+        cart_items:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/CartItemSchema'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Cart Items
+        cart_total:
+          type: integer
+          title: Cart Total
+        user_order_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Order Count
+        device_uuid:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Uuid
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - hub_id
+      - cart_items
+      - cart_total
+      title: CheckEligibilityRequestSchema
+      description: Schema for checking if cart meets deal trigger conditions
+    ApplyRewardRequestSchema:
+      properties:
+        deal_ids:
+          items:
+            type: integer
+          type: array
+          title: Deal Ids
+        hub_id:
+          type: integer
+          title: Hub Id
+        user_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: User Id
+        cart_items:
+          items:
+            $ref: '#/components/schemas/CartItemSchema'
+          type: array
+          title: Cart Items
+        device_uuid:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Uuid
+      type: object
+      required:
+      - deal_ids
+      - hub_id
+      - cart_items
+      title: ApplyRewardRequestSchema
+      description: Schema for applying a reward to the cart
     DealCreateSchema:
       properties:
         name:
@@ -1007,6 +974,77 @@ components:
       - end
       - hub_id
       title: DealCreateSchema
+    DealUpdateSchema:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        display_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Text
+        display_image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Image
+        start:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+        end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+        hub_id:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Hub Id
+        is_deal_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Deal Active
+        stackable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Stackable
+        priority:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Priority
+      type: object
+      title: DealUpdateSchema
+    TriggerType:
+      type: string
+      enum:
+      - CARTVAL
+      - CONTAINSCAT
+      - CONTAINSITEM
+      - FIRSTORDER
+      - NTHORDER
+      - BDAY
+      - REFERRAL
+      - TIME
+      title: TriggerType
+      description: Enumeration for deal trigger types
     HTTPValidationError:
       properties:
         detail:
@@ -1016,118 +1054,7 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    DealConstraintBaseSchema:
-      properties:
-        name:
-          type: string
-          title: Name
-        constraint_type:
-          $ref: '#/components/schemas/ConstraintType'
-        redemption_limit:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Redemption Limit
-        period:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Period
-        product_id:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Product Id
-        category_id:
-          anyOf:
-          - items:
-              anyOf:
-              - type: integer
-              - type: string
-            type: array
-          - type: 'null'
-          title: Category Id
-        subcategory_id:
-          anyOf:
-          - items:
-              anyOf:
-              - type: integer
-              - type: string
-            type: array
-          - type: 'null'
-          title: Subcategory Id
-      type: object
-      required:
-      - name
-      - constraint_type
-      title: DealConstraintBaseSchema
-    DealTriggerBaseSchema:
-      properties:
-        name:
-          type: string
-          title: Name
-        trigger_type:
-          $ref: '#/components/schemas/TriggerType'
-        product_id:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Product Id
-        category_id:
-          anyOf:
-          - items:
-              anyOf:
-              - type: integer
-              - type: string
-            type: array
-          - type: 'null'
-          title: Category Id
-        subcategory_id:
-          anyOf:
-          - items:
-              anyOf:
-              - type: integer
-              - type: string
-            type: array
-          - type: 'null'
-          title: Subcategory Id
-        nth_order:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Nth Order
-        min_val_trigger:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Min Val Trigger
-        time_window_start:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Time Window Start
-        time_window_end:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Time Window End
-        days_of_the_week:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Days Of The Week
-      type: object
-      required:
-      - name
-      - trigger_type
-      title: DealTriggerBaseSchema
-    CartItemSchema:
+    ModifiedCartItemSchema:
       properties:
         product_id:
           type: integer
@@ -1145,16 +1072,116 @@ components:
         quantity:
           type: integer
           title: Quantity
-        unit_price:
+        original_unit_price:
           type: integer
-          title: Unit Price
+          title: Original Unit Price
+        discounted_unit_price:
+          type: integer
+          title: Discounted Unit Price
+        discount_applied:
+          type: boolean
+          title: Discount Applied
+          default: false
+        quantity_discounted:
+          type: integer
+          title: Quantity Discounted
+          default: 0
       type: object
       required:
       - product_id
       - quantity
-      - unit_price
-      title: CartItemSchema
-      description: Schema for cart items when checking eligibility
+      - original_unit_price
+      - discounted_unit_price
+      title: ModifiedCartItemSchema
+      description: Schema for cart items with applied discounts
+    DealRewardBaseSchema:
+      properties:
+        name:
+          type: string
+          title: Name
+        reward_type:
+          $ref: '#/components/schemas/RewardType'
+        product_id:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Product Id
+        category_id:
+          anyOf:
+          - items:
+              anyOf:
+              - type: integer
+              - type: string
+            type: array
+          - type: 'null'
+          title: Category Id
+        subcategory_id:
+          anyOf:
+          - items:
+              anyOf:
+              - type: integer
+              - type: string
+            type: array
+          - type: 'null'
+          title: Subcategory Id
+        discount_pct_or_price:
+          type: integer
+          title: Discount Pct Or Price
+      type: object
+      required:
+      - name
+      - reward_type
+      - discount_pct_or_price
+      title: DealRewardBaseSchema
+    ApplyRewardResponseSchema:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        deal_applied:
+          type: string
+          title: Deal Applied
+        modified_cart_items:
+          items:
+            $ref: '#/components/schemas/ModifiedCartItemSchema'
+          type: array
+          title: Modified Cart Items
+        original_cart_total:
+          type: integer
+          title: Original Cart Total
+        discounted_cart_total:
+          type: integer
+          title: Discounted Cart Total
+        total_savings:
+          type: integer
+          title: Total Savings
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - success
+      - deal_applied
+      - modified_cart_items
+      - original_cart_total
+      - discounted_cart_total
+      - total_savings
+      - message
+      title: ApplyRewardResponseSchema
+      description: Response schema for applying rewards
+    RewardType:
+      type: string
+      enum:
+      - ITEMVAL
+      - ITEMDISC
+      - MULTVAL
+      - MULTDISC
+      - CARTVAL
+      - CARTDISC
+      title: RewardType
+      description: Enumeration for deal reward types
     DealRetrieveSchema:
       properties:
         name:
@@ -1238,30 +1265,3 @@ components:
       - created_at
       - modified_at
       title: DealRetrieveSchema
-    TriggerType:
-      type: string
-      enum:
-      - CARTVAL
-      - CONTAINSCAT
-      - CONTAINSITEM
-      - FIRSTORDER
-      - NTHORDER
-      - BDAY
-      - REFERRAL
-      - TIME
-      title: TriggerType
-      description: Enumeration for deal trigger types
-    Body_create_deal_from_owner_deals_create_from_owner_post:
-      properties:
-        dealData:
-          type: string
-          title: Dealdata
-        file:
-          type: string
-          contentMediaType: application/octet-stream
-          title: File
-      type: object
-      required:
-      - dealData
-      - file
-      title: Body_create_deal_from_owner_deals_create_from_owner_post
