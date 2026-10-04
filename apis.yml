@@ -27,6 +27,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/autonomous-solutions-capability-edges.yml
+  name: VenHub Business Capability Map
 - type: AgenticAccess
   url: agentic-access/autonomous-solutions-agentic-access.yml
 - type: RateLimits
@@ -80,6 +83,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Banners
+  tags_raw:
   - banners
   properties:
   - type: OpenAPI
@@ -101,7 +106,8 @@ apis:
   description: The bg_tasks API from VenHub — 6 operation(s) for bg_tasks.
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
-  tags:
+  tags: []
+  tags_raw:
   - bg_tasks
   properties:
   - type: OpenAPI
@@ -124,6 +130,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Categories
+  tags_raw:
   - categories
   properties:
   - type: OpenAPI
@@ -146,6 +154,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Deals
+  tags_raw:
   - deals
   properties:
   - type: OpenAPI
@@ -168,6 +178,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Diagnostics
+  tags_raw:
   - diagnostics
   properties:
   - type: OpenAPI
@@ -234,6 +246,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Hub
+  tags_raw:
   - hubs
   properties:
   - type: OpenAPI
@@ -256,6 +270,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Job
+  tags_raw:
   - jobs
   properties:
   - type: OpenAPI
@@ -278,6 +294,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Logs
+  tags_raw:
   - logs
   properties:
   - type: OpenAPI
@@ -300,6 +318,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Loyalty Points
+  tags_raw:
   - loyalty-points
   properties:
   - type: OpenAPI
@@ -322,6 +342,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Order
+  tags_raw:
   - orders
   properties:
   - type: OpenAPI
@@ -344,6 +366,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Product
+  tags_raw:
   - products
   properties:
   - type: OpenAPI
@@ -366,6 +390,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Root
+  tags_raw:
   - root
   properties:
   - type: OpenAPI
@@ -410,6 +436,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - User
+  tags_raw:
   - user
   properties:
   - type: OpenAPI
@@ -454,6 +482,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - User Notifications
+  tags_raw:
   - user-notifications
   properties:
   - type: OpenAPI
@@ -498,6 +528,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - User Profile
+  tags_raw:
   - user profile
   properties:
   - type: OpenAPI
@@ -520,6 +552,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - User Wallet
+  tags_raw:
   - user-wallet
   properties:
   - type: OpenAPI
@@ -564,6 +598,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - Zendesk
+  tags_raw:
   - zendesk
   properties:
   - type: OpenAPI
