@@ -221,14 +221,6 @@ components:
       - quantity_in_basket
       - tax_type
       title: ProductRetrieveSchema
-    ProductTaxType:
-      type: string
-      enum:
-      - sales_tax
-      - bottle_tax
-      - no_tax
-      - unknown_tax
-      title: ProductTaxType
     SimilarProductSchema:
       properties:
         name:
@@ -295,6 +287,14 @@ components:
       - subcategory
       - category
       title: SimilarProductSchema
+    ProductTaxType:
+      type: string
+      enum:
+      - sales_tax
+      - bottle_tax
+      - no_tax
+      - unknown_tax
+      title: ProductTaxType
     HTTPValidationError:
       properties:
         detail:

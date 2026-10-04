@@ -490,163 +490,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ContactChannel:
-      type: string
-      enum:
-      - email
-      - phone
-      title: ContactChannel
-    UserBootstrap:
-      properties:
-        channel:
-          $ref: '#/components/schemas/ContactChannel'
-        value:
-          type: string
-          minLength: 1
-          title: Value
-      type: object
-      required:
-      - channel
-      - value
-      title: UserBootstrap
-      description: Body for POST /users/bootstrap — Firebase verified the contact channel already.
-    UserProfilePatch:
-      properties:
-        first_name:
-          type: string
-          minLength: 1
-          title: First Name
-        last_name:
-          type: string
-          minLength: 1
-          title: Last Name
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-      type: object
-      required:
-      - first_name
-      - last_name
-      title: UserProfilePatch
-      description: Body for PATCH /users/me/profile — supplies fields currently null on the user row.
-    UserFCMConfigCreateSchema:
-      properties:
-        fcm_token:
-          type: string
-          title: Fcm Token
-        device_id:
-          type: string
-          title: Device Id
-        device_type:
-          $ref: '#/components/schemas/DeviceTypeEnum'
-      type: object
-      required:
-      - fcm_token
-      - device_id
-      - device_type
-      title: UserFCMConfigCreateSchema
-    UserFirebaseIdUpdate:
-      properties:
-        phone_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone Number
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        firebase_user_id:
-          type: string
-          title: Firebase User Id
-      type: object
-      required:
-      - firebase_user_id
-      title: UserFirebaseIdUpdate
-    DeviceTypeEnum:
-      type: string
-      enum:
-      - ios
-      - android
-      title: DeviceTypeEnum
-    HubUserCurrentResponse:
-      properties:
-        id:
-          type: integer
-          title: Id
-        name:
-          type: string
-          title: Name
-        geojson_location:
-          anyOf:
-          - $ref: '#/components/schemas/GeoJsonLocation'
-          - type: 'null'
-        country:
-          type: string
-          title: Country
-        state:
-          type: string
-          title: State
-        city:
-          type: string
-          title: City
-        postal_code:
-          type: string
-          title: Postal Code
-        street_address_1:
-          type: string
-          title: Street Address 1
-        street_address_2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address 2
-        tax_rates:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Tax Rates
-        timezone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Timezone
-        approximate_order_limit:
-          type: integer
-          title: Approximate Order Limit
-        approximate_bin_opening_limit:
-          type: integer
-          title: Approximate Bin Opening Limit
-        max_cart_items:
-          type: integer
-          title: Max Cart Items
-        hub_status:
-          $ref: '#/components/schemas/HubStatus'
-      type: object
-      required:
-      - id
-      - name
-      - country
-      - state
-      - city
-      - postal_code
-      - street_address_1
-      - approximate_order_limit
-      - approximate_bin_opening_limit
-      - max_cart_items
-      - hub_status
-      title: HubUserCurrentResponse
     TransferAnonOrderResponse:
       properties:
         order_id:
@@ -660,161 +503,6 @@ components:
       - order_id
       - hub_id
       title: TransferAnonOrderResponse
-    HubDefaultRequest:
-      properties:
-        geojson_location:
-          anyOf:
-          - $ref: '#/components/schemas/GeoJsonLocation'
-          - type: 'null'
-      type: object
-      title: HubDefaultRequest
-    Body_update_user_profile_image_users_user_profile_image_patch:
-      properties:
-        files:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Files
-      type: object
-      required:
-      - files
-      title: Body_update_user_profile_image_users_user_profile_image_patch
-    UserProfileUpdate:
-      properties:
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        birthday:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Birthday
-        country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Country
-        state:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: State
-        city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: City
-        postal_code:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Postal Code
-        street_address_1:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address 1
-        street_address_2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address 2
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: 'null'
-          title: Email
-        phone_num:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone Num
-        is_migrated:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Migrated
-      type: object
-      title: UserProfileUpdate
-    UserCreateRetrieve:
-      properties:
-        id:
-          type: integer
-          title: Id
-        firebase_user_id:
-          type: string
-          title: Firebase User Id
-        selected_hub_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Selected Hub Id
-      type: object
-      required:
-      - id
-      - firebase_user_id
-      title: UserCreateRetrieve
-    UserExists:
-      properties:
-        exists:
-          type: boolean
-          title: Exists
-        firebase_user_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Firebase User Id
-      type: object
-      required:
-      - exists
-      title: UserExists
-    UserBootstrapResponse:
-      properties:
-        user_id:
-          type: integer
-          title: User Id
-        profile_complete:
-          type: boolean
-          title: Profile Complete
-      type: object
-      required:
-      - user_id
-      - profile_complete
-      title: UserBootstrapResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     UserCreate:
       properties:
         firebase_user_id:
@@ -909,128 +597,6 @@ components:
       required:
       - firebase_user_id
       title: UserCreate
-    UserProfileRetrieve:
-      properties:
-        firebase_user_id:
-          type: string
-          title: Firebase User Id
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        birthday:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Birthday
-        country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Country
-        state:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: State
-        city:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: City
-        postal_code:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Postal Code
-        street_address_1:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address 1
-        street_address_2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Street Address 2
-        email:
-          anyOf:
-          - type: string
-            format: email
-          - type: string
-            const: ''
-          - type: 'null'
-          title: Email
-        phone_num:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone Num
-        image_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Image Url
-        selected_hub_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Selected Hub Id
-        is_migrated:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Migrated
-          default: false
-        profile_complete:
-          type: boolean
-          title: Profile Complete
-          default: false
-        geojson_location:
-          anyOf:
-          - $ref: '#/components/schemas/GeoJsonLocation'
-          - type: 'null'
-        id:
-          type: integer
-          title: Id
-        loyalty_points:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Loyalty Points
-          default: 0
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - firebase_user_id
-      - id
-      - created_at
-      - updated_at
-      title: UserProfileRetrieve
-    HubStatus:
-      type: string
-      enum:
-      - active
-      - maintenance
-      - restocking
-      - hidden
-      title: HubStatus
     TransferAnonOrderRequest:
       properties:
         anon_user_id:
@@ -1044,15 +610,26 @@ components:
       - anon_user_id
       - order_id
       title: TransferAnonOrderRequest
-    HTTPValidationError:
+    UserFirebaseIdUpdate:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
       type: object
-      title: HTTPValidationError
+      required:
+      - firebase_user_id
+      title: UserFirebaseIdUpdate
     UserProfileImage:
       properties:
         url:
@@ -1062,6 +639,79 @@ components:
       required:
       - url
       title: UserProfileImage
+    UserBootstrap:
+      properties:
+        channel:
+          $ref: '#/components/schemas/ContactChannel'
+        value:
+          type: string
+          minLength: 1
+          title: Value
+      type: object
+      required:
+      - channel
+      - value
+      title: UserBootstrap
+      description: Body for POST /users/bootstrap — Firebase verified the contact channel already.
+    HubStatus:
+      type: string
+      enum:
+      - active
+      - maintenance
+      - restocking
+      - hidden
+      title: HubStatus
+    HubDefaultRequest:
+      properties:
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+      type: object
+      title: HubDefaultRequest
+    UserProfilePatch:
+      properties:
+        first_name:
+          type: string
+          minLength: 1
+          title: First Name
+        last_name:
+          type: string
+          minLength: 1
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+      type: object
+      required:
+      - first_name
+      - last_name
+      title: UserProfilePatch
+      description: Body for PATCH /users/me/profile — supplies fields currently null on the user row.
+    UserFCMConfigCreateSchema:
+      properties:
+        fcm_token:
+          type: string
+          title: Fcm Token
+        device_id:
+          type: string
+          title: Device Id
+        device_type:
+          $ref: '#/components/schemas/DeviceTypeEnum'
+      type: object
+      required:
+      - fcm_token
+      - device_id
+      - device_type
+      title: UserFCMConfigCreateSchema
     UserDataRetrieve:
       properties:
         firebase_user_id:
@@ -1185,6 +835,171 @@ components:
       - created_at
       - updated_at
       title: UserDataRetrieve
+    UserExists:
+      properties:
+        exists:
+          type: boolean
+          title: Exists
+        firebase_user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Firebase User Id
+      type: object
+      required:
+      - exists
+      title: UserExists
+    UserProfileUpdate:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+      type: object
+      title: UserProfileUpdate
+    GeoJsonLocation:
+      properties:
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: Point
+        coordinates:
+          items:
+            type: number
+          type: array
+          title: Coordinates
+      type: object
+      required:
+      - coordinates
+      title: GeoJsonLocation
+    HubUserCurrentResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        country:
+          type: string
+          title: Country
+        state:
+          type: string
+          title: State
+        city:
+          type: string
+          title: City
+        postal_code:
+          type: string
+          title: Postal Code
+        street_address_1:
+          type: string
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        tax_rates:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Tax Rates
+        timezone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Timezone
+        approximate_order_limit:
+          type: integer
+          title: Approximate Order Limit
+        approximate_bin_opening_limit:
+          type: integer
+          title: Approximate Bin Opening Limit
+        max_cart_items:
+          type: integer
+          title: Max Cart Items
+        hub_status:
+          $ref: '#/components/schemas/HubStatus'
+      type: object
+      required:
+      - id
+      - name
+      - country
+      - state
+      - city
+      - postal_code
+      - street_address_1
+      - approximate_order_limit
+      - approximate_bin_opening_limit
+      - max_cart_items
+      - hub_status
+      title: HubUserCurrentResponse
     UserProfileMeResponse:
       properties:
         id:
@@ -1223,20 +1038,205 @@ components:
       - profile_complete
       title: UserProfileMeResponse
       description: Response for PATCH /user/me/profile — null-safe during progressive signup.
-    GeoJsonLocation:
+    ContactChannel:
+      type: string
+      enum:
+      - email
+      - phone
+      title: ContactChannel
+    UserProfileRetrieve:
       properties:
-        type:
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        first_name:
           anyOf:
           - type: string
           - type: 'null'
-          title: Type
-          default: Point
-        coordinates:
-          items:
-            type: number
-          type: array
-          title: Coordinates
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        birthday:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birthday
+        country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country
+        state:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        postal_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postal Code
+        street_address_1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 1
+        street_address_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address 2
+        email:
+          anyOf:
+          - type: string
+            format: email
+          - type: string
+            const: ''
+          - type: 'null'
+          title: Email
+        phone_num:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Num
+        image_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Image Url
+        selected_hub_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Selected Hub Id
+        is_migrated:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Migrated
+          default: false
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+          default: false
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        id:
+          type: integer
+          title: Id
+        loyalty_points:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Loyalty Points
+          default: 0
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
       type: object
       required:
-      - coordinates
-      title: GeoJsonLocation
+      - firebase_user_id
+      - id
+      - created_at
+      - updated_at
+      title: UserProfileRetrieve
+    Body_update_user_profile_image_users_user_profile_image_patch:
+      properties:
+        files:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Files
+      type: object
+      required:
+      - files
+      title: Body_update_user_profile_image_users_user_profile_image_patch
+    UserBootstrapResponse:
+      properties:
+        user_id:
+          type: integer
+          title: User Id
+        profile_complete:
+          type: boolean
+          title: Profile Complete
+      type: object
+      required:
+      - user_id
+      - profile_complete
+      title: UserBootstrapResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UserCreateRetrieve:
+      properties:
+        id:
+          type: integer
+          title: Id
+        firebase_user_id:
+          type: string
+          title: Firebase User Id
+        selected_hub_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Selected Hub Id
+      type: object
+      required:
+      - id
+      - firebase_user_id
+      title: UserCreateRetrieve
+    DeviceTypeEnum:
+      type: string
+      enum:
+      - ios
+      - android
+      title: DeviceTypeEnum

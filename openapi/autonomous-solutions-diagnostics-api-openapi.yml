@@ -301,31 +301,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    CeleryWorkerResponse:
-      properties:
-        environment:
-          type: string
-          title: Environment
-        statistics:
-          additionalProperties: true
-          type: object
-          title: Statistics
-        tasks:
-          additionalProperties: true
-          type: object
-          title: Tasks
-        metrics:
-          items:
-            $ref: '#/components/schemas/SysInfoResponse'
-          type: array
-          title: Metrics
-      type: object
-      required:
-      - environment
-      - statistics
-      - tasks
-      - metrics
-      title: CeleryWorkerResponse
     ValidationError:
       properties:
         loc:
@@ -362,3 +337,28 @@ components:
           title: Job Id
       type: object
       title: BgTaskResponse
+    CeleryWorkerResponse:
+      properties:
+        environment:
+          type: string
+          title: Environment
+        statistics:
+          additionalProperties: true
+          type: object
+          title: Statistics
+        tasks:
+          additionalProperties: true
+          type: object
+          title: Tasks
+        metrics:
+          items:
+            $ref: '#/components/schemas/SysInfoResponse'
+          type: array
+          title: Metrics
+      type: object
+      required:
+      - environment
+      - statistics
+      - tasks
+      - metrics
+      title: CeleryWorkerResponse

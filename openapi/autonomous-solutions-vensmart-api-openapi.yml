@@ -31,6 +31,92 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    DroppedItem:
+      properties:
+        quantity:
+          type: integer
+          title: Quantity
+        product_detail_id:
+          type: integer
+          title: Product Detail Id
+      type: object
+      required:
+      - quantity
+      - product_detail_id
+      title: DroppedItem
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BinStatus:
+      properties:
+        bin_num:
+          type: integer
+          title: Bin Num
+        occurrence:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Occurrence
+        status_code:
+          type: integer
+          title: Status Code
+        is_ready:
+          type: boolean
+          title: Is Ready
+          default: false
+        is_dropped:
+          type: boolean
+          title: Is Dropped
+          default: false
+      type: object
+      required:
+      - bin_num
+      - status_code
+      title: BinStatus
+      description: "Status information for an individual bin.\n\nAttributes:\n    bin_num: The bin number\n    occurrence: The occurrence count for this bin (for handling multiple bins with the same number)\n    status_code: VensmartStatusCode indicating the bin's current state\n    is_ready: Whether the bin is ready to be opened\n    is_dropped: Whether all items in this bin were dropped"
+    HubEvent:
+      properties:
+        message_type:
+          $ref: '#/components/schemas/HubMessageType'
+        message_content:
+          $ref: '#/components/schemas/MessageContent'
+      type: object
+      required:
+      - message_type
+      - message_content
+      title: HubEvent
     HubMessageType:
       type: string
       enum:
@@ -45,19 +131,6 @@ components:
       - order_started
       - door_opened
       title: HubMessageType
-    DroppedItem:
-      properties:
-        quantity:
-          type: integer
-          title: Quantity
-        product_detail_id:
-          type: integer
-          title: Product Detail Id
-      type: object
-      required:
-      - quantity
-      - product_detail_id
-      title: DroppedItem
     MessageContent:
       properties:
         user_id:
@@ -116,76 +189,3 @@ components:
           title: Hub Response Status Code
       type: object
       title: MessageContent
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    HubEvent:
-      properties:
-        message_type:
-          $ref: '#/components/schemas/HubMessageType'
-        message_content:
-          $ref: '#/components/schemas/MessageContent'
-      type: object
-      required:
-      - message_type
-      - message_content
-      title: HubEvent
-    BinStatus:
-      properties:
-        bin_num:
-          type: integer
-          title: Bin Num
-        occurrence:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Occurrence
-        status_code:
-          type: integer
-          title: Status Code
-        is_ready:
-          type: boolean
-          title: Is Ready
-          default: false
-        is_dropped:
-          type: boolean
-          title: Is Dropped
-          default: false
-      type: object
-      required:
-      - bin_num
-      - status_code
-      title: BinStatus
-      description: "Status information for an individual bin.\n\nAttributes:\n    bin_num: The bin number\n    occurrence: The occurrence count for this bin (for handling multiple bins with the same number)\n    status_code: VensmartStatusCode indicating the bin's current state\n    is_ready: Whether the bin is ready to be opened\n    is_dropped: Whether all items in this bin were dropped"
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError

@@ -106,6 +106,15 @@ paths:
               schema: {}
 components:
   schemas:
+    UpdateNotificationReadStatusSchema:
+      properties:
+        is_read:
+          type: boolean
+          title: Is Read
+      type: object
+      required:
+      - is_read
+      title: UpdateNotificationReadStatusSchema
     HTTPValidationError:
       properties:
         detail:
@@ -141,12 +150,3 @@ components:
       - msg
       - type
       title: ValidationError
-    UpdateNotificationReadStatusSchema:
-      properties:
-        is_read:
-          type: boolean
-          title: Is Read
-      type: object
-      required:
-      - is_read
-      title: UpdateNotificationReadStatusSchema

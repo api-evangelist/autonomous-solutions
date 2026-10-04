@@ -405,44 +405,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UpdateOrderItemSchema:
-      properties:
-        product_id:
-          type: integer
-          title: Product Id
-        quantity:
-          type: integer
-          minimum: 0.0
-          title: Quantity
-      type: object
-      required:
-      - product_id
-      - quantity
-      title: UpdateOrderItemSchema
-    OrderOrderingField:
-      type: string
-      enum:
-      - created_at
-      - price
-      - status
-      title: OrderOrderingField
-    OrderProcessingStatus:
-      type: integer
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
-      title: OrderProcessingStatus
-      description: 'Enumeration of the various stages an Order can be in,
-
-        from creation through payment and fulfillment.'
     HTTPValidationError:
       properties:
         detail:
@@ -478,3 +440,41 @@ components:
       - msg
       - type
       title: ValidationError
+    OrderOrderingField:
+      type: string
+      enum:
+      - created_at
+      - price
+      - status
+      title: OrderOrderingField
+    OrderProcessingStatus:
+      type: integer
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      title: OrderProcessingStatus
+      description: 'Enumeration of the various stages an Order can be in,
+
+        from creation through payment and fulfillment.'
+    UpdateOrderItemSchema:
+      properties:
+        product_id:
+          type: integer
+          title: Product Id
+        quantity:
+          type: integer
+          minimum: 0.0
+          title: Quantity
+      type: object
+      required:
+      - product_id
+      - quantity
+      title: UpdateOrderItemSchema
