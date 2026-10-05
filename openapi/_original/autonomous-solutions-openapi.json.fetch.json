@@ -1,0 +1,12 @@
+{
+ "url": "https://api.venhub.com/openapi.json",
+ "requested_url": "https://api.venhub.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 122302,
+ "sha256": "fd8b383cde2ce485816a3c437399d752e7a4256a4aaa7c9f46aab862ef52242a",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
