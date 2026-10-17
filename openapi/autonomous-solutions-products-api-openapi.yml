@@ -502,14 +502,6 @@ components:
       - subcategory
       - category
       title: SimilarProductSchema
-    ProductTaxType:
-      type: string
-      enum:
-      - sales_tax
-      - bottle_tax
-      - no_tax
-      - unknown_tax
-      title: ProductTaxType
     HTTPValidationError:
       properties:
         detail:
@@ -519,6 +511,14 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ProductTaxType:
+      type: string
+      enum:
+      - sales_tax
+      - bottle_tax
+      - no_tax
+      - unknown_tax
+      title: ProductTaxType
     ValidationError:
       properties:
         loc:

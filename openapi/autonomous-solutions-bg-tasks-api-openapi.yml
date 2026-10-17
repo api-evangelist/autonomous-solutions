@@ -105,6 +105,16 @@ paths:
                 $ref: '#/components/schemas/BgTaskResponse'
 components:
   schemas:
+    BgTaskResponse:
+      properties:
+        job_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Job Id
+      type: object
+      title: BgTaskResponse
     HTTPValidationError:
       properties:
         detail:
@@ -140,13 +150,3 @@ components:
       - msg
       - type
       title: ValidationError
-    BgTaskResponse:
-      properties:
-        job_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Job Id
-      type: object
-      title: BgTaskResponse

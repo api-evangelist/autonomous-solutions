@@ -335,14 +335,23 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HubStatusUpdateRequest:
+    GeoJsonLocation:
       properties:
-        hub_status:
-          $ref: '#/components/schemas/HubStatus'
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: Point
+        coordinates:
+          items:
+            type: number
+          type: array
+          title: Coordinates
       type: object
       required:
-      - hub_status
-      title: HubStatusUpdateRequest
+      - coordinates
+      title: GeoJsonLocation
     Body_create_hub_banner_hubs_owner_banners_post:
       properties:
         name:
@@ -361,77 +370,14 @@ components:
       - order_by
       - file
       title: Body_create_hub_banner_hubs_owner_banners_post
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HubNameLookupRequest:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        geojson_location:
-          anyOf:
-          - $ref: '#/components/schemas/GeoJsonLocation'
-          - type: 'null'
-        multi_search:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Multi Search
-          default: true
-      type: object
-      title: HubNameLookupRequest
-    GeoJsonLocation:
-      properties:
-        type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Type
-          default: Point
-        coordinates:
-          items:
-            type: number
-          type: array
-          title: Coordinates
-      type: object
-      required:
-      - coordinates
-      title: GeoJsonLocation
+    HubStatus:
+      type: string
+      enum:
+      - active
+      - maintenance
+      - restocking
+      - hidden
+      title: HubStatus
     HubUserCurrentResponse:
       properties:
         id:
@@ -500,11 +446,65 @@ components:
       - max_cart_items
       - hub_status
       title: HubUserCurrentResponse
-    HubStatus:
-      type: string
-      enum:
-      - active
-      - maintenance
-      - restocking
-      - hidden
-      title: HubStatus
+    HubStatusUpdateRequest:
+      properties:
+        hub_status:
+          $ref: '#/components/schemas/HubStatus'
+      type: object
+      required:
+      - hub_status
+      title: HubStatusUpdateRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HubNameLookupRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        geojson_location:
+          anyOf:
+          - $ref: '#/components/schemas/GeoJsonLocation'
+          - type: 'null'
+        multi_search:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Multi Search
+          default: true
+      type: object
+      title: HubNameLookupRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

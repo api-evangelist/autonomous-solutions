@@ -73,6 +73,32 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    LoyaltyPointsBalanceSchema:
+      properties:
+        loyalty_points:
+          type: integer
+          title: Loyalty Points
+          description: Current VenBucks balance
+        points_value_in_cents:
+          type: integer
+          title: Points Value In Cents
+          description: Monetary value of points in cents
+      type: object
+      required:
+      - loyalty_points
+      - points_value_in_cents
+      title: LoyaltyPointsBalanceSchema
+      description: Schema for user's loyalty points balance
+    Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post:
+      properties:
+        order_total_cents:
+          type: integer
+          title: Order Total Cents
+          description: Order subtotal in cents (after deal discounts, before tax)
+      type: object
+      required:
+      - order_total_cents
+      title: Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post
     HTTPValidationError:
       properties:
         detail:
@@ -82,6 +108,27 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    LoyaltyPointsCalculationSchema:
+      properties:
+        order_total:
+          type: integer
+          title: Order Total
+          description: Order total in cents
+        points_to_earn:
+          type: integer
+          title: Points To Earn
+          description: VenBucks that will be earned
+        points_value:
+          type: integer
+          title: Points Value
+          description: Monetary value in cents
+      type: object
+      required:
+      - order_total
+      - points_to_earn
+      - points_value
+      title: LoyaltyPointsCalculationSchema
+      description: Schema for calculating potential points for an order
     ValidationError:
       properties:
         loc:
@@ -108,50 +155,3 @@ components:
       - msg
       - type
       title: ValidationError
-    LoyaltyPointsCalculationSchema:
-      properties:
-        order_total:
-          type: integer
-          title: Order Total
-          description: Order total in cents
-        points_to_earn:
-          type: integer
-          title: Points To Earn
-          description: VenBucks that will be earned
-        points_value:
-          type: integer
-          title: Points Value
-          description: Monetary value in cents
-      type: object
-      required:
-      - order_total
-      - points_to_earn
-      - points_value
-      title: LoyaltyPointsCalculationSchema
-      description: Schema for calculating potential points for an order
-    Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post:
-      properties:
-        order_total_cents:
-          type: integer
-          title: Order Total Cents
-          description: Order subtotal in cents (after deal discounts, before tax)
-      type: object
-      required:
-      - order_total_cents
-      title: Body_calculate_potential_earnings_users_loyalty_calculate_earnings_post
-    LoyaltyPointsBalanceSchema:
-      properties:
-        loyalty_points:
-          type: integer
-          title: Loyalty Points
-          description: Current VenBucks balance
-        points_value_in_cents:
-          type: integer
-          title: Points Value In Cents
-          description: Monetary value of points in cents
-      type: object
-      required:
-      - loyalty_points
-      - points_value_in_cents
-      title: LoyaltyPointsBalanceSchema
-      description: Schema for user's loyalty points balance

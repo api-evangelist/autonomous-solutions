@@ -268,6 +268,25 @@ paths:
                 $ref: '#/components/schemas/BgTaskResponse'
 components:
   schemas:
+    BgTaskResponse:
+      properties:
+        job_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Job Id
+      type: object
+      title: BgTaskResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     SysInfoResponse:
       properties:
         environment:
@@ -292,15 +311,31 @@ components:
       - usage
       - app_settings
       title: SysInfoResponse
-    HTTPValidationError:
+    CeleryWorkerResponse:
       properties:
-        detail:
+        environment:
+          type: string
+          title: Environment
+        statistics:
+          additionalProperties: true
+          type: object
+          title: Statistics
+        tasks:
+          additionalProperties: true
+          type: object
+          title: Tasks
+        metrics:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/SysInfoResponse'
           type: array
-          title: Detail
+          title: Metrics
       type: object
-      title: HTTPValidationError
+      required:
+      - environment
+      - statistics
+      - tasks
+      - metrics
+      title: CeleryWorkerResponse
     ValidationError:
       properties:
         loc:
@@ -327,38 +362,3 @@ components:
       - msg
       - type
       title: ValidationError
-    BgTaskResponse:
-      properties:
-        job_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Job Id
-      type: object
-      title: BgTaskResponse
-    CeleryWorkerResponse:
-      properties:
-        environment:
-          type: string
-          title: Environment
-        statistics:
-          additionalProperties: true
-          type: object
-          title: Statistics
-        tasks:
-          additionalProperties: true
-          type: object
-          title: Tasks
-        metrics:
-          items:
-            $ref: '#/components/schemas/SysInfoResponse'
-          type: array
-          title: Metrics
-      type: object
-      required:
-      - environment
-      - statistics
-      - tasks
-      - metrics
-      title: CeleryWorkerResponse
