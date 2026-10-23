@@ -317,3 +317,9 @@ components:
       - payment_method_id
       title: WalletDepositRequest
       description: Schema for deposit request
+x-provenance:
+  method: harvested
+  publisher: VenHub
+  source: https://api.venhub.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
