@@ -462,6 +462,8 @@ apis:
   humanURL: https://developer.venhub.com/docs/index.html
   baseURL: https://api.venhub.com
   tags:
+  - UserFavorites
+  tags_raw:
   - user-favorites
   properties:
   - type: OpenAPI
