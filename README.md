@@ -64,5 +64,157 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-VenHub is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/autonomous-solutions_stock/
+VenHub is the industry leader in robotic retail, providing fully autonomous, AI‑powered smart stores that operate 24/7 without staff. Their solutions enable rapid deployment, seamless checkout‑free experiences, and scalable retail automation across venues such as hospitals, hotels, schools, and transportation hubs.
+
+**Areas:** Retail · Robotics · Automated Stores · Smart Lockers · 24/7 Retail · Hospitality · Education · Healthcare
+
+## VenHub on APIs.io
+
+Everything profiled for VenHub is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/autonomous-solutions/](https://apis.io/providers/autonomous-solutions/)** — or go straight to one of the APIs or properties below.
+
+### APIs (25)
+
+- [VenHub Banners API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-banners-api/) — The banners API from VenHub — 2 operation(s) for banners.
+- [VenHub Bg Tasks API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-bg-tasks-api/) — The bg_tasks API from VenHub — 6 operation(s) for bg_tasks.
+- [VenHub Categories API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-categories-api/) — The categories API from VenHub — 2 operation(s) for categories.
+- [VenHub Deals API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-deals-api/) — The deals API from VenHub — 9 operation(s) for deals.
+- [VenHub Diagnostics API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-diagnostics-api/) — The diagnostics API from VenHub — 12 operation(s) for diagnostics.
+- [VenHub Guest Checkout API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-guest-checkout-api/) — The guest-checkout API from VenHub — 10 operation(s) for guest-checkout.
+- [VenHub HLS API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-hls-api/) — The HLS API from VenHub — 3 operation(s) for hls.
+- [VenHub Hubs API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-hubs-api/) — The hubs API from VenHub — 6 operation(s) for hubs.
+- [VenHub Jobs API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-jobs-api/) — The jobs API from VenHub — 2 operation(s) for jobs.
+- [VenHub Logs API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-logs-api/) — The logs API from VenHub — 4 operation(s) for logs.
+- [VenHub Loyalty Points API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-loyalty-points-api/) — The loyalty-points API from VenHub — 2 operation(s) for loyalty-points.
+- [VenHub Orders API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-orders-api/) — The orders API from VenHub — 8 operation(s) for orders.
+- [VenHub Products API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-products-api/) — The products API from VenHub — 6 operation(s) for products.
+- [VenHub Root API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-root-api/) — The root API from VenHub — 1 operation(s) for root.
+- [VenHub selected hub API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-selected-hub-api/) — The selected hub API from VenHub — 2 operation(s) for selected hub.
+- [VenHub User API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-user-api/) — The user API from VenHub — 14 operation(s) for user.
+- [VenHub User Favorites API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-user-favorites-api/) — The user-favorites API from VenHub — 2 operation(s) for user-favorites.
+- [VenHub User Notifications API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-user-notifications-api/) — The user-notifications API from VenHub — 4 operation(s) for user-notifications.
+- [VenHub User Payment API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-user-payment-api/) — The user-payment API from VenHub — 8 operation(s) for user-payment.
+- [VenHub user profile API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-user-profile-api/) — The user profile API from VenHub — 3 operation(s) for user profile.
+- [VenHub User Wallet API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-user-wallet-api/) — The user-wallet API from VenHub — 4 operation(s) for user-wallet.
+- [VenHub Vensmart API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-vensmart-api/) — The vensmart API from VenHub — 1 operation(s) for vensmart.
+- [VenHub Zendesk API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-zendesk-api/) — The zendesk API from VenHub — 1 operation(s) for zendesk.
+- [VenHub Zendesk Webhook API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-zendesk-webhook-api/) — The zendesk-webhook API from VenHub — 1 operation(s) for zendesk-webhook.
+- [VenHub Health Check API](https://apis.io/apis/autonomous-solutions/autonomous-solutions-health-check-api/) — The Health Check API from VenHub — 1 operation(s) for health check.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Autonomous Solutions Agentic Access](https://apis.io/agentic-access/autonomous-solutions/autonomous-solutions-agentic-access/)
+
+#### JSON Schema (6)
+
+The data models the API reads and writes.
+
+- [DealRetrieveSchema](https://apis.io/schemas/autonomous-solutions/autonomous-solutions-deal-retrieve-schema/)
+- [ProductRetrieveSchema](https://apis.io/schemas/autonomous-solutions/autonomous-solutions-product-retrieve-schema/)
+- [UserCreate](https://apis.io/schemas/autonomous-solutions/autonomous-solutions-user-create/)
+- [UserDataRetrieve](https://apis.io/schemas/autonomous-solutions/autonomous-solutions-user-data-retrieve/)
+- [UserProfileRetrieve](https://apis.io/schemas/autonomous-solutions/autonomous-solutions-user-profile-retrieve/)
+- [WalletTransactionResponse](https://apis.io/schemas/autonomous-solutions/autonomous-solutions-wallet-transaction-response/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Autonomous Solutions Context](https://apis.io/jsonld/autonomous-solutions/autonomous-solutions-context/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Autonomous Solutions Openapi Overlay](https://apis.io/overlays/autonomous-solutions/autonomous-solutions-openapi-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [VenHub API Rules](https://apis.io/rules/autonomous-solutions/autonomous-solutions-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Autonomous Solutions Authentication](https://apis.io/security/autonomous-solutions/autonomous-solutions-authentication/)
+- [Autonomous Solutions Domain Security](https://apis.io/security/autonomous-solutions/autonomous-solutions-domain-security/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Autonomous Solutions Rate Limits](https://apis.io/rate-limits/autonomous-solutions/autonomous-solutions-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.venhub.com/)
+- [Documentation](https://developer.venhub.com/)
+- [Getting started](https://developer.venhub.com/docs/index.html)
+- [Blog](https://www.venhub.com/blogs)
+- [Trust centre](https://trust.venhub.com/)
+- [Terms of service](https://www.venhub.com/legal/terms-and-conditions)
+- [Privacy policy](https://www.venhub.com/legal/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 39.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 67.9 |
+| Contract quality | 51.9 |
+| Contract governance | 22.0 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 37.5 |
+| Access clarity | 28.9 |
+
+**Agent readiness 29.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 23.4** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/autonomous-solutions/](https://apis.io/providers/autonomous-solutions/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for VenHub: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/autonomous-solutions/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
